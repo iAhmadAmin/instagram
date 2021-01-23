@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:instagram/ui/pages/Splash/splash_page.dart';
 import 'package:get/get.dart';
 
-void main() {
+import 'core/services/theme_services.dart';
+import 'ui/styles/themes.dart';
+
+void main() async {
+  await GetStorage.init();
   runApp(MyApp());
 }
 
@@ -11,6 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeService().theme,
       home: SplashPage(),
     );
   }
