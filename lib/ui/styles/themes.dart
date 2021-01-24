@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/ui/styles/colors.dart';
 
 final lightTheme = ThemeData(
-  backgroundColor: Colors.white,
+  backgroundColor: lightBackgroundColor,
   brightness: Brightness.light,
 );
 final darkTheme = ThemeData(
-  backgroundColor: Colors.black,
+  backgroundColor: darkBackgroundColor,
   brightness: Brightness.dark,
 );

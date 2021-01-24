@@ -1,5 +1,9 @@
 include: package:lint/analysis_options.yaml
 
+linter:
+  rules:
+    argument_type_not_assignable: false
+
 # linter:
 #   rules:
 #     missing_required_param: true  

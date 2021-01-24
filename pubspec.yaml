@@ -10,7 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.0
-  flutter_icons: ^1.1.0
   get: ^3.24.0
   get_storage: ^1.4.0
   google_fonts: ^1.1.1
@@ -26,10 +25,11 @@ flutter:
 
   assets:
     - assets/images/
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: MyIcons
+      fonts:
+        - asset: assets/icons/MyIcons.ttf
+
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

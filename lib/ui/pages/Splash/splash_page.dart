@@ -1,5 +1,10 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:instagram/sizeconfig.dart';
+import 'package:instagram/ui/styles/colors.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
+import 'package:get/get.dart';
+import 'package:instagram/ui/pages/Root/root_page.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -14,12 +19,21 @@ class _SplashPageState extends State<SplashPage> {
       Color(0xfffd1d1d),
       Color(0xffc13584)
     ],
-  ).createShader(Rect.fromLTWH(0.0, 1.0, 200, 20));
+  ).createShader(const Rect.fromLTWH(0, 0, 200, 40));
+
+  @override
+  void initState() {
+    Timer(const Duration(seconds: 2), () {
+      Get.off(RootPage());
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: backgroundColor,
       body: Container(
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 20),
@@ -29,7 +43,7 @@ class _SplashPageState extends State<SplashPage> {
             const SizedBox(height: 20),
             Image.asset(
               'assets/images/logo.png',
-              height: 100,
+              height: 90,
             ),
             Column(children: [
               Text(
