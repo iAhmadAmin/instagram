@@ -45,21 +45,21 @@ TextStyle get titleTextStle {
   );
 }
 
-TextStyle get body1TextStyle {
+TextStyle get bodyTextStyle {
   return GoogleFonts.roboto(
     textStyle: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w400,
-        color: Get.isDarkMode ? Colors.grey[200] : Colors.grey[600]),
+        color: Get.isDarkMode ? Colors.white : Colors.grey[600]),
   );
 }
 
-TextStyle get body2TextStyle {
+TextStyle get impBodyTextStyle {
   return GoogleFonts.roboto(
     textStyle: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-        color: Get.isDarkMode ? Colors.grey[200] : Colors.grey[600]),
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        color: Get.isDarkMode ? Colors.white : Colors.grey[600]),
   );
 }
 

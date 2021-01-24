@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:instagram/my_icons.dart';
 import 'package:instagram/sizeconfig.dart';
-import 'package:instagram/ui/icons/my_icons.dart';
 import 'package:instagram/ui/pages/Activity/activity_page.dart';
 import 'package:instagram/ui/pages/Home/home_page.dart';
 import 'package:instagram/ui/pages/Profile/profile_page.dart';
@@ -31,44 +30,12 @@ class _RootPageState extends State<RootPage> {
       body: SafeArea(
         child: Column(
           children: [
-            _appBar(),
             Expanded(
               child: _pages[_selectedTab],
             ),
             _bottomNavBar(),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _appBar() {
-    return Container(
-      padding: const EdgeInsets.only(left: 16, right: 10),
-      width: SizeConfig.screenWidth,
-      height: 60,
-      decoration: BoxDecoration(
-        color: backgroundColor,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            "Instagram",
-            style: GoogleFonts.pacifico(
-                textStyle: TextStyle(
-                    fontSize: getProportionateScreenHeight(32),
-                    fontWeight: FontWeight.w600,
-                    color: textColor)),
-          ),
-          IconButton(
-            icon: Icon(
-              MyIcons.messenger,
-              color: textColor,
-            ),
-            onPressed: () {},
-          )
-        ],
       ),
     );
   }
@@ -130,7 +97,10 @@ class _RootPageState extends State<RootPage> {
       child: CircleAvatar(
         radius: 16,
         backgroundColor: _selectedTab == 4 ? textColor : backgroundColor,
-        child: CircleAvatar(radius: 14, backgroundColor: Colors.grey),
+        child: const CircleAvatar(
+          radius: 14,
+          backgroundImage: AssetImage("assets/images/dp.jpg"),
+        ),
       ),
     );
   }

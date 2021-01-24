@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:instagram/ui/pages/Splash/splash_page.dart';
 import 'package:get/get.dart';
-import 'core/services/theme_services.dart';
 import 'ui/styles/themes.dart';
 
 void main() async {

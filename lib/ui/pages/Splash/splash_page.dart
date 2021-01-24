@@ -12,14 +12,8 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  final Shader linearGradient = const LinearGradient(
-    colors: <Color>[
-      Color(0xfffcaf45),
-      Color(0xfff77737),
-      Color(0xfffd1d1d),
-      Color(0xffc13584)
-    ],
-  ).createShader(const Rect.fromLTWH(0, 0, 200, 40));
+  final Shader linearGradient =
+      instaGrad.createShader(const Rect.fromLTWH(0, 0, 200, 40));
 
   @override
   void initState() {
