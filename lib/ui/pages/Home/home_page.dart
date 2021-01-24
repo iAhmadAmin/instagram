@@ -11,15 +11,12 @@ import '../../../my_icons.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      body: CustomScrollView(
-        slivers: [
-          _appBar(),
-          _storyBar(),
-          _postBar(),
-        ],
-      ),
+    return CustomScrollView(
+      slivers: [
+        _appBar(),
+        _storyBar(),
+        _postBar(),
+      ],
     );
   }
 
@@ -29,7 +26,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: backgroundColor,
       title: Image.asset(
         "assets/images/insta_logo.png",
-        height: 50,
+        height: 44,
         color: textColor,
       ),
       actions: [
@@ -81,21 +78,30 @@ class HomePage extends StatelessWidget {
   Widget _storyBar() {
     return SliverToBoxAdapter(
       child: SizedBox(
-        height: 94,
+        height: 105,
         width: SizeConfig.screenWidth,
-        child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: stories.length + 1,
-            itemBuilder: (context, index) {
-              if (index == 0) {
-                return StoryWidget(story: Story(), isMe: true);
-              } else {
-                final Story story = stories[index - 1];
-                return StoryWidget(
-                  story: story,
-                );
-              }
-            }),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: stories.length + 1,
+                  itemBuilder: (context, index) {
+                    if (index == 0) {
+                      return StoryWidget(story: Story(), isMe: true);
+                    } else {
+                      final Story story = stories[index - 1];
+                      return StoryWidget(
+                        story: story,
+                      );
+                    }
+                  }),
+            ),
+            Divider(
+              color: textColor.withOpacity(0.12),
+            ),
+          ],
+        ),
       ),
     );
   }

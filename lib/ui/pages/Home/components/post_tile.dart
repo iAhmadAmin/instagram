@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/core/models/data.dart';
 import 'package:instagram/core/models/post.dart';
 import 'package:instagram/my_icons.dart';
 import 'package:instagram/sizeconfig.dart';
+import 'package:instagram/ui/pages/Profile/user_profile.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
+import 'package:get/get.dart';
+import 'package:instagram/ui/widgets/profile_widget.dart';
 
 class PostTile extends StatelessWidget {
   final Post post;
-  PostTile({@required this.post});
+  const PostTile({@required this.post});
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 16),
+      margin: const EdgeInsets.only(bottom: 16),
       width: SizeConfig.screenWidth,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -19,6 +23,8 @@ class PostTile extends StatelessWidget {
           _mediaBar(),
           _actionBar(),
           _postInfoBar(),
+          _addCommentBar(),
+          _timeStamp(),
         ],
       ),
     );
@@ -27,23 +33,45 @@ class PostTile extends StatelessWidget {
   Widget _userInfoBar() {
     return Container(
       padding: const EdgeInsets.only(
-        left: 12,
+        left: 8,
       ),
       child: Row(
         children: [
-          GestureDetector(
-            onTap: () {},
-            child: CircleAvatar(
-              radius: 16,
-              backgroundImage: AssetImage(post.userDp),
+          Hero(
+            tag: post.username,
+            child: ProfileWidget(
+              onTap: () {
+                Get.to(
+                  UserProfilePage(
+                    user: users
+                        .singleWhere((user) => user.username == post.username),
+                  ),
+                );
+              },
+              size: 15,
+              story: stories
+                  .singleWhere((story) => story.username == post.username),
             ),
           ),
           const SizedBox(
-            width: 12,
+            width: 8,
           ),
-          Text(post.username, style: impBodyTextStyle),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(post.username, style: impBodyTextStyle),
+              post.location != null
+                  ? Text(post.location, style: captionTextStyle)
+                  : const SizedBox(),
+            ],
+          ),
           const Spacer(),
-          IconButton(icon: Icon(Icons.more_vert), onPressed: () {})
+          IconButton(
+              icon: const Icon(Icons.more_vert, size: 20),
+              onPressed: () {
+                _bottomSheet();
+              })
         ],
       ),
     );
@@ -57,6 +85,7 @@ class PostTile extends StatelessWidget {
 
   Widget _actionBar() {
     return Container(
+      padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         children: [
           _actionButton(icon: MyIcons.heart, onTap: () {}),
@@ -72,10 +101,10 @@ class PostTile extends StatelessWidget {
   Widget _actionButton({IconData icon, Function onTap}) {
     return GestureDetector(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(6.0),
         child: Icon(
           icon,
-          size: 26,
+          size: 22,
           color: Colors.white,
         ),
       ),
@@ -85,7 +114,7 @@ class PostTile extends StatelessWidget {
 
   Widget _postInfoBar() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -93,12 +122,121 @@ class PostTile extends StatelessWidget {
             post.likes.toString() + " likes",
             style: impBodyTextStyle,
           ),
-          // Container(
-          //   child: Text(
-
-          //   ),
-          // ),
+          Container(
+            padding:
+                EdgeInsets.symmetric(vertical: post.postDesc != null ? 3 : 0),
+            child: post.postDesc != null
+                ? RichText(
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    text: TextSpan(
+                      text: post.username + " ",
+                      style: impBodyTextStyle,
+                      children: <TextSpan>[
+                        TextSpan(text: post.postDesc, style: bodyTextStyle),
+                      ],
+                    ),
+                  )
+                : const SizedBox(),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(
+                vertical: post.comments.length != 0 ? 3 : 0),
+            child: post.comments.length != 0
+                ? Text(
+                    "View all ${post.comments.length} comments",
+                    style: captionTextStyle,
+                  )
+                : const SizedBox(),
+          ),
         ],
+      ),
+    );
+  }
+
+  Widget _addCommentBar() {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+      child: Row(
+        children: [
+          const CircleAvatar(
+            radius: 14,
+            backgroundImage: AssetImage("assets/images/dp.jpg"),
+          ),
+          const SizedBox(
+            width: 6,
+          ),
+          Text(
+            "Add a comment...",
+            style: captionTextStyle,
+          ),
+          const Spacer(),
+          const Text("👌   😂   ➕")
+        ],
+      ),
+    );
+  }
+
+  Widget _timeStamp() {
+    return Container(
+      padding: const EdgeInsets.only(top: 4, left: 8),
+      child: Text(
+        "1 hour ago",
+        style: captionTextStyle.copyWith(fontSize: 10),
+      ),
+    );
+  }
+
+  _bottomSheet() {
+    return Get.bottomSheet(
+      Container(
+        height: SizeConfig.screenHeight * 0.4,
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Get.isDarkMode ? Colors.grey[850] : Colors.white,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Center(
+              child: Container(
+                height: 4,
+                width: 40,
+                decoration: BoxDecoration(
+                    color: Colors.grey, borderRadius: BorderRadius.circular(4)),
+              ),
+            ),
+            Text(
+              "Report...",
+              style: impBodyTextStyle,
+            ),
+            Text(
+              "Turn on post notifications",
+              style: impBodyTextStyle,
+            ),
+            Text(
+              "Copy link",
+              style: impBodyTextStyle,
+            ),
+            Text(
+              "Share to...",
+              style: impBodyTextStyle,
+            ),
+            Text(
+              "Unfollow",
+              style: impBodyTextStyle,
+            ),
+            Text(
+              "Mute",
+              style: impBodyTextStyle,
+            ),
+          ],
+        ),
       ),
     );
   }

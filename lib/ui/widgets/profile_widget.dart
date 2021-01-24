@@ -1,0 +1,38 @@
+import 'package:flutter/material.dart';
+import 'package:instagram/core/models/story.dart';
+import 'package:instagram/ui/styles/colors.dart';
+
+class ProfileWidget extends StatelessWidget {
+  final Story story;
+  final double size;
+  final Function onTap;
+
+  const ProfileWidget(
+      {@required this.onTap, @required this.size, @required this.story});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.all(size < 30 ? 0.8 : 1.5),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: LinearGradient(
+              colors: story.isViewed
+                  ? [Colors.grey, Colors.grey]
+                  : instaGrad.colors),
+          //color: Colors.white
+        ),
+        child: CircleAvatar(
+          radius: story.isViewed ? size : size - 1,
+          backgroundColor: backgroundColor,
+          child: CircleAvatar(
+            radius: size < 30 ? size - 1 : size - 3,
+            backgroundImage: AssetImage(story.userDp),
+          ),
+        ),
+      ),
+    );
+  }
+}

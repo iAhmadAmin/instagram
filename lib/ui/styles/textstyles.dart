@@ -49,7 +49,7 @@ TextStyle get bodyTextStyle {
   return GoogleFonts.roboto(
     textStyle: TextStyle(
         fontSize: 14,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w300,
         color: Get.isDarkMode ? Colors.white : Colors.grey[600]),
   );
 }
@@ -57,7 +57,7 @@ TextStyle get bodyTextStyle {
 TextStyle get impBodyTextStyle {
   return GoogleFonts.roboto(
     textStyle: TextStyle(
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: FontWeight.w600,
         color: Get.isDarkMode ? Colors.white : Colors.grey[600]),
   );
@@ -74,10 +74,8 @@ TextStyle get modalTextStyle {
 
 TextStyle get captionTextStyle {
   return GoogleFonts.roboto(
-    textStyle: TextStyle(
-        fontSize: 12,
-        fontWeight: FontWeight.w400,
-        color: Get.isDarkMode ? Colors.grey[200] : Colors.grey[600]),
+    textStyle: const TextStyle(
+        fontSize: 12, fontWeight: FontWeight.w400, color: Colors.grey),
   );
 }
 

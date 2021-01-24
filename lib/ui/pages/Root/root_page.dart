@@ -4,7 +4,7 @@ import 'package:instagram/my_icons.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/pages/Activity/activity_page.dart';
 import 'package:instagram/ui/pages/Home/home_page.dart';
-import 'package:instagram/ui/pages/Profile/profile_page.dart';
+import 'package:instagram/ui/pages/Profile/my_profile.dart';
 import 'package:instagram/ui/styles/colors.dart';
 
 class RootPage extends StatefulWidget {
@@ -20,7 +20,7 @@ class _RootPageState extends State<RootPage> {
     Container(),
     Container(),
     ActivityPage(),
-    ProfilePage(),
+    MyProfilePage(),
   ];
 
   @override

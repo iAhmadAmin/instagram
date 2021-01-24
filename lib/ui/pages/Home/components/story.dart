@@ -3,6 +3,7 @@ import 'package:instagram/core/models/story.dart';
 import 'package:instagram/my_icons.dart';
 import 'package:instagram/ui/styles/colors.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
+import 'package:instagram/ui/widgets/profile_widget.dart';
 
 class StoryWidget extends StatelessWidget {
   final Story story;
@@ -20,10 +21,10 @@ class StoryWidget extends StatelessWidget {
               ? Stack(
                   children: [
                     CircleAvatar(
-                      radius: 33,
-                      backgroundColor: textColor,
+                      radius: 32,
+                      backgroundColor: backgroundColor,
                       child: const CircleAvatar(
-                        radius: 32,
+                        radius: 31,
                         backgroundImage: AssetImage("assets/images/dp.jpg"),
                       ),
                     ),
@@ -31,14 +32,14 @@ class StoryWidget extends StatelessWidget {
                       bottom: 0,
                       right: 0,
                       child: CircleAvatar(
-                        radius: 11.2,
+                        radius: 10,
                         backgroundColor: textColor,
                         child: const CircleAvatar(
-                          radius: 10,
+                          radius: 8.5,
                           backgroundColor: primaryColor,
                           child: Icon(
                             MyIcons.add,
-                            size: 20,
+                            size: 18,
                             color: Colors.white,
                           ),
                         ),
@@ -46,25 +47,10 @@ class StoryWidget extends StatelessWidget {
                     ),
                   ],
                 )
-              : Container(
-                  padding: const EdgeInsets.all(1.5),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-
-                    gradient: LinearGradient(
-                        colors: story.isViewed
-                            ? [Colors.grey, Colors.grey]
-                            : instaGrad.colors),
-                    //color: Colors.white
-                  ),
-                  child: CircleAvatar(
-                    radius: story.isViewed ? 34 : 33,
-                    backgroundColor: backgroundColor,
-                    child: CircleAvatar(
-                      radius: 31,
-                      backgroundImage: AssetImage(story.userDp),
-                    ),
-                  ),
+              : ProfileWidget(
+                  onTap: () {},
+                  size: 34,
+                  story: story,
                 ),
           Text(
             isMe ? "Your story" : story.username,
