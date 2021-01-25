@@ -7,6 +7,7 @@ import 'package:instagram/ui/pages/Profile/user_profile.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
 import 'package:get/get.dart';
 import 'package:instagram/ui/widgets/profile_widget.dart';
+import 'package:instagram/ui/widgets/user_action_sheet.dart';
 
 class PostTile extends StatelessWidget {
   final Post post;
@@ -48,7 +49,7 @@ class PostTile extends StatelessWidget {
                   ),
                 );
               },
-              size: 15,
+              size: 18,
               story: stories
                   .singleWhere((story) => story.username == post.username),
             ),
@@ -70,7 +71,7 @@ class PostTile extends StatelessWidget {
           IconButton(
               icon: const Icon(Icons.more_vert, size: 20),
               onPressed: () {
-                _bottomSheet();
+                UserActionBTMSheet();
               })
         ],
       ),
@@ -105,7 +106,7 @@ class PostTile extends StatelessWidget {
         child: Icon(
           icon,
           size: 22,
-          color: Colors.white,
+          color: Get.isDarkMode ? Colors.white : Colors.black,
         ),
       ),
       onTap: onTap,
@@ -183,60 +184,6 @@ class PostTile extends StatelessWidget {
       child: Text(
         "1 hour ago",
         style: captionTextStyle.copyWith(fontSize: 10),
-      ),
-    );
-  }
-
-  _bottomSheet() {
-    return Get.bottomSheet(
-      Container(
-        height: SizeConfig.screenHeight * 0.4,
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: Get.isDarkMode ? Colors.grey[850] : Colors.white,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
-          ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Center(
-              child: Container(
-                height: 4,
-                width: 40,
-                decoration: BoxDecoration(
-                    color: Colors.grey, borderRadius: BorderRadius.circular(4)),
-              ),
-            ),
-            Text(
-              "Report...",
-              style: impBodyTextStyle,
-            ),
-            Text(
-              "Turn on post notifications",
-              style: impBodyTextStyle,
-            ),
-            Text(
-              "Copy link",
-              style: impBodyTextStyle,
-            ),
-            Text(
-              "Share to...",
-              style: impBodyTextStyle,
-            ),
-            Text(
-              "Unfollow",
-              style: impBodyTextStyle,
-            ),
-            Text(
-              "Mute",
-              style: impBodyTextStyle,
-            ),
-          ],
-        ),
       ),
     );
   }

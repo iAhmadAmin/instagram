@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
+import 'package:instagram/ui/styles/colors.dart';
 
 /// NAME       SIZE   WEIGHT   SPACING  2018 NAME
 /// display4   112.0  thin     0.0      headline1
@@ -49,8 +50,8 @@ TextStyle get bodyTextStyle {
   return GoogleFonts.roboto(
     textStyle: TextStyle(
         fontSize: 14,
-        fontWeight: FontWeight.w300,
-        color: Get.isDarkMode ? Colors.white : Colors.grey[600]),
+        fontWeight: FontWeight.w400,
+        color: Get.isDarkMode ? Colors.white : Colors.black),
   );
 }
 
@@ -59,32 +60,16 @@ TextStyle get impBodyTextStyle {
     textStyle: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w600,
-        color: Get.isDarkMode ? Colors.white : Colors.grey[600]),
-  );
-}
-
-TextStyle get modalTextStyle {
-  return GoogleFonts.roboto(
-    textStyle: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-        color: Get.isDarkMode ? Colors.grey[200] : Colors.grey[600]),
+        color: Get.isDarkMode ? Colors.white : Colors.black),
   );
 }
 
 TextStyle get captionTextStyle {
   return GoogleFonts.roboto(
-    textStyle: const TextStyle(
-        fontSize: 12, fontWeight: FontWeight.w400, color: Colors.grey),
-  );
-}
-
-TextStyle get buttonTextStyle {
-  return GoogleFonts.roboto(
     textStyle: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-        color: Get.isDarkMode ? Colors.grey[200] : Colors.grey[600]),
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        color: textColor.withOpacity(0.85)),
   );
 }
 

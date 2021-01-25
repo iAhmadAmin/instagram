@@ -19,17 +19,24 @@ class ProfileWidget extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: LinearGradient(
-              colors: story.isViewed
-                  ? [Colors.grey, Colors.grey]
-                  : instaGrad.colors),
+              colors: story != null
+                  ? story.isViewed
+                      ? [Colors.grey, Colors.grey]
+                      : instaGrad.colors
+                  : [backgroundColor, backgroundColor]),
           //color: Colors.white
         ),
         child: CircleAvatar(
-          radius: story.isViewed ? size : size - 1,
+          radius: story != null
+              ? story.isViewed
+                  ? size
+                  : size - 1
+              : size,
           backgroundColor: backgroundColor,
           child: CircleAvatar(
             radius: size < 30 ? size - 1 : size - 3,
-            backgroundImage: AssetImage(story.userDp),
+            backgroundImage: AssetImage(
+                story != null ? story.userDp : "assets/images/dp.jpg"),
           ),
         ),
       ),

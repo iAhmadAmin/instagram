@@ -33,7 +33,7 @@ class StoryWidget extends StatelessWidget {
                       right: 0,
                       child: CircleAvatar(
                         radius: 10,
-                        backgroundColor: textColor,
+                        backgroundColor: backgroundColor,
                         child: const CircleAvatar(
                           radius: 8.5,
                           backgroundColor: primaryColor,

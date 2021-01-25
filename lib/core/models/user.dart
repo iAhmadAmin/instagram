@@ -5,10 +5,14 @@ class User {
   int followers;
   int following;
   String name;
+  String website;
+  String bio;
 
   User(
       {this.followers,
       this.following,
+      this.bio,
+      this.website,
       this.name,
       this.post,
       this.userDp,
