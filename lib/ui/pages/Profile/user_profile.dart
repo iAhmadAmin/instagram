@@ -10,13 +10,15 @@ import 'package:instagram/ui/widgets/user_action_sheet.dart';
 
 class UserProfilePage extends StatefulWidget {
   final User user;
-  const UserProfilePage({@required this.user});
+  UserProfilePage({@required this.user});
 
   @override
   _UserProfilePageState createState() => _UserProfilePageState();
 }
 
 class _UserProfilePageState extends State<UserProfilePage> {
+  Color backgroundColor = Get.isDarkMode ? Colors.black : Colors.white;
+  Color textColor = Get.isDarkMode ? Colors.white : Colors.black;
   bool _showSuggestion = false;
   @override
   Widget build(BuildContext context) {

@@ -5,10 +5,12 @@ import 'package:instagram/core/models/story.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/pages/Home/components/post_tile.dart';
 import 'package:instagram/ui/pages/Home/components/story.dart';
-import 'package:instagram/ui/styles/colors.dart';
 import '../../../my_icons.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
+  Color backgroundColor = Get.isDarkMode ? Colors.black : Colors.white;
+  Color textColor = Get.isDarkMode ? Colors.white : Colors.black;
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -23,7 +25,7 @@ class HomePage extends StatelessWidget {
   Widget _appBar() {
     return SliverAppBar(
       pinned: true,
-      backgroundColor: backgroundColor,
+      backgroundColor: Get.isDarkMode ? Colors.black : Colors.white,
       title: Image.asset(
         "assets/images/insta_logo.png",
         height: 44,
@@ -33,46 +35,12 @@ class HomePage extends StatelessWidget {
         IconButton(
           icon: Icon(
             MyIcons.messenger,
-            color: textColor,
+            color: Get.isDarkMode ? Colors.white : Colors.black,
           ),
           onPressed: () {},
         )
       ],
     );
-
-    // Container(
-    //   padding: const EdgeInsets.only(left: 16, right: 10),
-    //   width: SizeConfig.screenWidth,
-    //   height: 60,
-    //   decoration: BoxDecoration(
-    //     color: backgroundColor,
-    //   ),
-    //   child: Row(
-    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //     children: [
-    //       // const Text(
-    //       //   "Instagram",
-    //       //   style: TextStyle(
-    //       //     fontFamily: "Billabong",
-    //       //     fontSize: 34,
-    //       //     fontWeight: FontWeight.w400,
-    //       //   ),
-    //       // ),
-    //       Image.asset(
-    //         "assets/images/insta_logo.png",
-    //         height: 50,
-    //         color: textColor,
-    //       ),
-    //       IconButton(
-    //         icon: Icon(
-    //           MyIcons.messenger,
-    //           color: textColor,
-    //         ),
-    //         onPressed: () {},
-    //       )
-    //     ],
-    //   ),
-    // );
   }
 
   Widget _storyBar() {
@@ -98,7 +66,9 @@ class HomePage extends StatelessWidget {
                   }),
             ),
             Divider(
-              color: textColor.withOpacity(0.12),
+              color: Get.isDarkMode
+                  ? Colors.white.withOpacity(0.12)
+                  : Colors.black.withOpacity(0.12),
             ),
           ],
         ),

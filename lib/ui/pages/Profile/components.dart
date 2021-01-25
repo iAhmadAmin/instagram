@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/core/models/data.dart';
-import 'package:instagram/core/models/story.dart';
 import 'package:instagram/core/models/user.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/styles/colors.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
 import 'package:instagram/ui/widgets/profile_widget.dart';
+import 'package:get/get.dart';
 
 List<String> photos = [
   "assets/images/1.jpg",
@@ -117,9 +117,17 @@ Widget button(
       width: width,
       decoration: BoxDecoration(
         border: Border.all(
-          color: isFilled ? primaryColor : textColor.withOpacity(0.5),
+          color: isFilled
+              ? primaryColor
+              : Get.isDarkMode
+                  ? Colors.white.withOpacity(0.5)
+                  : Colors.black.withOpacity(0.5),
         ),
-        color: isFilled ? primaryColor : backgroundColor,
+        color: isFilled
+            ? primaryColor
+            : Get.isDarkMode
+                ? Colors.black
+                : Colors.white,
         borderRadius: BorderRadius.circular(6),
       ),
       child: Center(

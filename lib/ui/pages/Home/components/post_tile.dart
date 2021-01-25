@@ -172,7 +172,7 @@ class PostTile extends StatelessWidget {
             style: captionTextStyle,
           ),
           const Spacer(),
-          const Text("👌   😂   ➕")
+          const Text("👌   😂   ➕ ")
         ],
       ),
     );

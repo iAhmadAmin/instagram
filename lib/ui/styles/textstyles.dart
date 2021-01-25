@@ -69,7 +69,9 @@ TextStyle get captionTextStyle {
     textStyle: TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w400,
-        color: textColor.withOpacity(0.85)),
+        color: Get.isDarkMode
+            ? Colors.white.withOpacity(0.85)
+            : Colors.black.withOpacity(0.85)),
   );
 }
 

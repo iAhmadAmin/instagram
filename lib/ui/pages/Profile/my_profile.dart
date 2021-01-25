@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/core/controllers/main_controller.dart';
 import 'package:instagram/core/models/user.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/pages/Profile/components.dart';
@@ -8,6 +9,9 @@ import 'package:get/get.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
 
 class MyProfilePage extends StatelessWidget {
+  final MainController _controller = Get.find<MainController>();
+  Color backgroundColor = Get.isDarkMode ? Colors.black : Colors.white;
+  Color textColor = Get.isDarkMode ? Colors.white : Colors.black;
   final User user = User(
     username: "i_ahmadamin",
     userDp: "assets/images/dp.jpg",
@@ -67,7 +71,7 @@ class MyProfilePage extends StatelessWidget {
   Widget _appBar() {
     return SliverAppBar(
         pinned: true,
-        backgroundColor: backgroundColor,
+        backgroundColor: Get.isDarkMode ? Colors.black : Colors.white,
         title: Text(
           user.username,
           style: TextStyle(color: Get.isDarkMode ? Colors.white : Colors.black),
@@ -83,9 +87,11 @@ class MyProfilePage extends StatelessWidget {
           IconButton(
             icon: Icon(
               Icons.menu,
-              color: textColor,
+              color: Get.isDarkMode ? Colors.white : Colors.black,
             ),
-            onPressed: () {},
+            onPressed: () {
+              _controller.controlMenu();
+            },
           )
         ]);
   }

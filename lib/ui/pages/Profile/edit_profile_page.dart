@@ -8,7 +8,8 @@ import 'package:get/get.dart';
 class EditProfilePage extends StatelessWidget {
   final User user;
   EditProfilePage({@required this.user});
-
+  Color backgroundColor = Get.isDarkMode ? Colors.black : Colors.white;
+  Color textColor = Get.isDarkMode ? Colors.white : Colors.black;
   TextEditingController _nameTextController = TextEditingController();
   TextEditingController _usernameTextController = TextEditingController();
   TextEditingController _bioTextController = TextEditingController();
