@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
       title: Image.asset(
         "assets/images/insta_logo.png",
         height: 44,
-        color: textColor,
+        color: Get.isDarkMode ? Colors.white : Colors.black,
       ),
       actions: [
         IconButton(

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/core/models/data.dart';
 import 'package:instagram/core/models/user.dart';
@@ -85,25 +86,6 @@ Widget _counter({@required String count, @required String label}) {
   );
 }
 
-Widget postGrid() {
-  return SliverGrid(
-    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-      maxCrossAxisExtent: SizeConfig.screenWidth / 3,
-      mainAxisSpacing: 2.0,
-      crossAxisSpacing: 2.0,
-    ),
-    delegate: SliverChildBuilderDelegate(
-      (BuildContext context, int index) {
-        return Image.asset(
-          photos[index],
-          fit: BoxFit.cover,
-        );
-      },
-      childCount: photos.length,
-    ),
-  );
-}
-
 Widget button(
     {bool isFilled = false,
     double height = 36,
@@ -133,6 +115,25 @@ Widget button(
       child: Center(
         child: child,
       ),
+    ),
+  );
+}
+
+Widget postGrid() {
+  return SliverGrid(
+    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+      maxCrossAxisExtent: SizeConfig.screenWidth / 3,
+      mainAxisSpacing: 2.0,
+      crossAxisSpacing: 2.0,
+    ),
+    delegate: SliverChildBuilderDelegate(
+      (BuildContext context, int index) {
+        return Image.asset(
+          photos[index],
+          fit: BoxFit.cover,
+        );
+      },
+      childCount: photos.length,
     ),
   );
 }

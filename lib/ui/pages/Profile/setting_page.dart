@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram/my_icons.dart';
+import 'package:instagram/sizeconfig.dart';
+import 'package:instagram/ui/styles/colors.dart';
+import 'package:instagram/ui/widgets/search_bar.dart';
 
 class SettingPage extends StatelessWidget {
   @override
@@ -26,6 +29,7 @@ class SettingPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SearchBar(),
             _button(label: "Foolow and invite friends", icon: Icons.person_add),
             _button(label: "Privacy", icon: MyIcons.lock_outline),
             _button(label: "Security", icon: Icons.security),
@@ -33,17 +37,35 @@ class SettingPage extends StatelessWidget {
             _button(label: "Account", icon: MyIcons.account),
             _button(label: "Help", icon: MyIcons.help),
             _button(label: "About", icon: MyIcons.info_outline),
-            _button(
-                icon: Get.isDarkMode ? Icons.wb_sunny : Icons.nights_stay,
-                label: Get.isDarkMode ? "Enable lite mode" : "Enable dark mode",
-                onTap: () {
-                  print("theme change pressed");
-                  if (Get.isDarkMode) {
-                    Get.changeThemeMode(ThemeMode.light);
-                  } else {
-                    Get.changeThemeMode(ThemeMode.dark);
-                  }
-                }),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Add pr switch accounts",
+                    style: TextStyle(color: primaryColor, fontSize: 18),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    "log out i_ahmadamin",
+                    style: TextStyle(color: primaryColor, fontSize: 18),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    "log out of all accounts",
+                    style: TextStyle(color: primaryColor, fontSize: 18),
+                  )
+                ],
+              ),
+            )
           ],
         ),
       ),

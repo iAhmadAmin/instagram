@@ -6,6 +6,7 @@ import 'package:instagram/ui/pages/Profile/components.dart';
 import 'package:instagram/ui/styles/colors.dart';
 import 'package:get/get.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
+import 'package:instagram/ui/widgets/profile_widget.dart';
 import 'package:instagram/ui/widgets/user_action_sheet.dart';
 
 class UserProfilePage extends StatefulWidget {

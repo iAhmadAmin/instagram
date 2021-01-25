@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/core/controllers/main_controller.dart';
+import 'package:instagram/core/models/data.dart';
 import 'package:instagram/core/models/user.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/pages/Profile/components.dart';
@@ -7,6 +8,7 @@ import 'package:instagram/ui/pages/Profile/edit_profile_page.dart';
 import 'package:instagram/ui/styles/colors.dart';
 import 'package:get/get.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
+import 'package:instagram/ui/widgets/profile_widget.dart';
 
 class MyProfilePage extends StatelessWidget {
   final MainController _controller = Get.find<MainController>();

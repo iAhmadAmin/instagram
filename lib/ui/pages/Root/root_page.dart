@@ -7,7 +7,7 @@ import 'package:instagram/ui/pages/Activity/activity_page.dart';
 import 'package:instagram/ui/pages/Home/home_page.dart';
 import 'package:instagram/ui/pages/Profile/my_profile.dart';
 import 'package:instagram/ui/pages/Profile/setting_page.dart';
-import 'package:instagram/ui/styles/colors.dart';
+import 'package:instagram/ui/pages/Search/search_page.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
 
 class RootPage extends StatefulWidget {
@@ -22,7 +22,7 @@ class _RootPageState extends State<RootPage> {
 
   final List<Widget> _pages = [
     HomePage(),
-    Container(),
+    SearchPage(),
     Container(),
     ActivityPage(),
     MyProfilePage(),
@@ -173,6 +173,17 @@ class _RootPageState extends State<RootPage> {
               _button(icon: MyIcons.bookmark, label: "Saved"),
               _button(icon: MyIcons.star, label: "Close friends"),
               _button(icon: MyIcons.add_people, label: "Discover people"),
+              _button(
+                  icon: Get.isDarkMode ? Icons.wb_sunny : Icons.nights_stay,
+                  label:
+                      Get.isDarkMode ? "Enable lite mode" : "Enable dark mode",
+                  onTap: () {
+                    if (Get.isDarkMode) {
+                      Get.changeThemeMode(ThemeMode.light);
+                    } else {
+                      Get.changeThemeMode(ThemeMode.dark);
+                    }
+                  }),
               const Spacer(),
               Container(
                   height: 0.5,
