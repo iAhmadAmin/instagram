@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram/my_icons.dart';
-import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/styles/colors.dart';
 import 'package:instagram/ui/widgets/search_bar.dart';
 
@@ -9,15 +8,14 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Get.isDarkMode ? Colors.black : Colors.white,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Get.isDarkMode ? Colors.black : Colors.white,
+        backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(color: Colors.black),
         elevation: 0,
-        iconTheme:
-            IconThemeData(color: Get.isDarkMode ? Colors.white : Colors.black),
-        title: Text(
+        title: const Text(
           "Settings",
-          style: TextStyle(color: Get.isDarkMode ? Colors.white : Colors.black),
+          style: TextStyle(color: Colors.black),
         ),
         leading: IconButton(
             icon: const Icon(Icons.arrow_back),
@@ -26,47 +24,50 @@ class SettingPage extends StatelessWidget {
             }),
       ),
       body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SearchBar(),
-            _button(label: "Foolow and invite friends", icon: Icons.person_add),
-            _button(label: "Privacy", icon: MyIcons.lock_outline),
-            _button(label: "Security", icon: Icons.security),
-            _button(label: "Payment", icon: MyIcons.payment),
-            _button(label: "Account", icon: MyIcons.account),
-            _button(label: "Help", icon: MyIcons.help),
-            _button(label: "About", icon: MyIcons.info_outline),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Add pr switch accounts",
-                    style: TextStyle(color: primaryColor, fontSize: 18),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Text(
-                    "log out i_ahmadamin",
-                    style: TextStyle(color: primaryColor, fontSize: 18),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Text(
-                    "log out of all accounts",
-                    style: TextStyle(color: primaryColor, fontSize: 18),
-                  )
-                ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SearchBar(),
+              _button(
+                  label: "Foolow and invite friends", icon: Icons.person_add),
+              _button(label: "Privacy", icon: MyIcons.lock_outline),
+              _button(label: "Security", icon: Icons.security),
+              _button(label: "Payment", icon: MyIcons.payment),
+              _button(label: "Account", icon: MyIcons.account),
+              _button(label: "Help", icon: MyIcons.help),
+              _button(label: "About", icon: MyIcons.info_outline),
+              const SizedBox(
+                height: 20,
               ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Add pr switch accounts",
+                      style: TextStyle(color: primaryColor, fontSize: 18),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "log out i_ahmadamin",
+                      style: TextStyle(color: primaryColor, fontSize: 18),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "log out of all accounts",
+                      style: TextStyle(color: primaryColor, fontSize: 18),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -82,16 +83,16 @@ class SettingPage extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: Get.isDarkMode ? Colors.white : Colors.black,
+              color: Colors.black,
             ),
             const SizedBox(
               width: 10,
             ),
             Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
-                color: Get.isDarkMode ? Colors.white : Colors.black,
+                color: Colors.black,
               ),
             ),
           ],

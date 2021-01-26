@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/core/controllers/main_controller.dart';
-import 'package:instagram/core/models/data.dart';
 import 'package:instagram/core/models/user.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/pages/Profile/components.dart';
@@ -8,12 +7,9 @@ import 'package:instagram/ui/pages/Profile/edit_profile_page.dart';
 import 'package:instagram/ui/styles/colors.dart';
 import 'package:get/get.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
-import 'package:instagram/ui/widgets/profile_widget.dart';
 
 class MyProfilePage extends StatelessWidget {
   final MainController _controller = Get.find<MainController>();
-  Color backgroundColor = Get.isDarkMode ? Colors.black : Colors.white;
-  Color textColor = Get.isDarkMode ? Colors.white : Colors.black;
   final User user = User(
     username: "i_ahmadamin",
     userDp: "assets/images/dp.jpg",
@@ -52,8 +48,8 @@ class MyProfilePage extends StatelessWidget {
           child: button(
               child: Text(
                 "Edit Profile",
-                style:
-                    subHeadingTextStyle.copyWith(fontWeight: FontWeight.w600),
+                style: subHeadingTextStyle.copyWith(
+                    color: Colors.black, fontWeight: FontWeight.w600),
               ),
               width: SizeConfig.screenWidth * 0.85,
               onTap: () {
@@ -71,35 +67,30 @@ class MyProfilePage extends StatelessWidget {
   }
 
   Widget _appBar() {
-    return GetBuilder<MainController>(
-      builder: (value) {
-        return SliverAppBar(
-            pinned: true,
-            backgroundColor: _controller.isDark ? Colors.black : Colors.white,
-            title: Text(
-              user.username,
-              style: TextStyle(
-                  color: _controller.isDark ? Colors.white : Colors.black),
+    return SliverAppBar(
+        pinned: true,
+        backgroundColor: Colors.white,
+        title: Text(
+          user.username,
+          style: const TextStyle(color: Colors.black),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.add,
+              color: Colors.black,
             ),
-            actions: [
-              IconButton(
-                icon: Icon(
-                  Icons.add,
-                  color: _controller.isDark ? Colors.white : Colors.black,
-                ),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.menu,
-                  color: _controller.isDark ? Colors.white : Colors.black,
-                ),
-                onPressed: () {
-                  _controller.controlMenu();
-                },
-              )
-            ]);
-      },
-    );
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(
+              Icons.menu,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              _controller.controlMenu();
+            },
+          )
+        ]);
   }
 }

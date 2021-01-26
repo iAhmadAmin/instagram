@@ -22,9 +22,9 @@ class SearchPage extends StatelessWidget {
                   width: SizeConfig.screenWidth - 60,
                 ),
                 const Spacer(),
-                Icon(
+                const Icon(
                   MyIcons.qr_code,
-                  color: Get.isDarkMode ? Colors.white : Colors.black,
+                  color: Colors.black,
                 ),
               ],
             ),

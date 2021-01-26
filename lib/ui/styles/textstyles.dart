@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:get/get.dart';
-import 'package:instagram/ui/styles/colors.dart';
 
 /// NAME       SIZE   WEIGHT   SPACING  2018 NAME
 /// display4   112.0  thin     0.0      headline1
@@ -21,46 +19,36 @@ import 'package:instagram/ui/styles/colors.dart';
 
 TextStyle get headingTextStyle {
   return GoogleFonts.roboto(
-    textStyle: TextStyle(
-        fontSize: 24,
-        fontWeight: FontWeight.normal,
-        color: Get.isDarkMode ? Colors.white : Colors.black),
+    textStyle: const TextStyle(
+        fontSize: 24, fontWeight: FontWeight.normal, color: Colors.black),
   );
 }
 
 TextStyle get subHeadingTextStyle {
   return GoogleFonts.roboto(
-    textStyle: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.normal,
-        color: Get.isDarkMode ? Colors.white : Colors.black),
+    textStyle: const TextStyle(
+        fontSize: 16, fontWeight: FontWeight.normal, color: Colors.black),
   );
 }
 
 TextStyle get titleTextStle {
   return GoogleFonts.roboto(
-    textStyle: TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.w500,
-        color: Get.isDarkMode ? Colors.white : Colors.black),
+    textStyle: const TextStyle(
+        fontSize: 20, fontWeight: FontWeight.w500, color: Colors.black),
   );
 }
 
 TextStyle get bodyTextStyle {
   return GoogleFonts.roboto(
-    textStyle: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-        color: Get.isDarkMode ? Colors.white : Colors.black),
+    textStyle: const TextStyle(
+        fontSize: 14, fontWeight: FontWeight.w400, color: Colors.black),
   );
 }
 
 TextStyle get impBodyTextStyle {
   return GoogleFonts.roboto(
-    textStyle: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w600,
-        color: Get.isDarkMode ? Colors.white : Colors.black),
+    textStyle: const TextStyle(
+        fontSize: 14, fontWeight: FontWeight.w600, color: Colors.black),
   );
 }
 
@@ -69,17 +57,13 @@ TextStyle get captionTextStyle {
     textStyle: TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w400,
-        color: Get.isDarkMode
-            ? Colors.white.withOpacity(0.85)
-            : Colors.black.withOpacity(0.85)),
+        color: Colors.black.withOpacity(0.85)),
   );
 }
 
 TextStyle get ovrelineTextStyle {
   return GoogleFonts.roboto(
     textStyle: TextStyle(
-        fontSize: 10,
-        fontWeight: FontWeight.w400,
-        color: Get.isDarkMode ? Colors.grey[200] : Colors.grey[600]),
+        fontSize: 10, fontWeight: FontWeight.w400, color: Colors.grey[600]),
   );
 }

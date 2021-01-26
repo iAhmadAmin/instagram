@@ -19,7 +19,6 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   final MainController _controller = Get.put(MainController());
 
-  Color textColor = Get.isDarkMode ? Colors.white : Colors.black;
   int _selectedTab = 0;
 
   final List<Widget> _pages = [
@@ -33,7 +32,7 @@ class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.theme.backgroundColor,
+      backgroundColor: Colors.white,
       body: GetBuilder<MainController>(builder: (controller) {
         final bool isMenuOpend = controller.isMenuOpened;
         return SafeArea(
@@ -71,8 +70,8 @@ class _RootPageState extends State<RootPage> {
       padding: const EdgeInsets.only(left: 16, right: 10),
       width: SizeConfig.screenWidth,
       height: 60,
-      decoration: BoxDecoration(
-        color: Get.isDarkMode ? Colors.black : Colors.white,
+      decoration: const BoxDecoration(
+        color: Colors.white,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -112,7 +111,7 @@ class _RootPageState extends State<RootPage> {
                   _selectedTab = index;
                 });
               },
-        icon: Icon(icon, color: Get.isDarkMode ? Colors.white : Colors.black),
+        icon: Icon(icon, color: Colors.black),
       );
     });
   }
@@ -126,13 +125,7 @@ class _RootPageState extends State<RootPage> {
       },
       child: CircleAvatar(
         radius: 16,
-        backgroundColor: _selectedTab == 4
-            ? Get.isDarkMode
-                ? Colors.white
-                : Colors.black
-            : Get.isDarkMode
-                ? Colors.black
-                : Colors.white,
+        backgroundColor: _selectedTab == 4 ? Colors.black : Colors.white,
         child: const CircleAvatar(
           radius: 14,
           backgroundImage: AssetImage("assets/images/dp.jpg"),
@@ -148,9 +141,7 @@ class _RootPageState extends State<RootPage> {
         children: [
           VerticalDivider(
             width: 0.5,
-            color: Get.isDarkMode
-                ? Colors.white.withOpacity(0.5)
-                : Colors.black.withOpacity(0.5),
+            color: Colors.black.withOpacity(0.5),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -168,7 +159,7 @@ class _RootPageState extends State<RootPage> {
               Container(
                   height: 0.5,
                   width: SizeConfig.screenWidth * 0.7,
-                  color: textColor.withOpacity(0.5)),
+                  color: Colors.white.withOpacity(0.5)),
               _button(icon: MyIcons.archive, label: "Archive"),
               _button(icon: MyIcons.activity, label: "Your activity"),
               _button(icon: MyIcons.qr_code, label: "QR code"),
@@ -176,22 +167,14 @@ class _RootPageState extends State<RootPage> {
               _button(icon: MyIcons.star, label: "Close friends"),
               _button(icon: MyIcons.add_people, label: "Discover people"),
               _button(
-                  icon: Get.isDarkMode ? Icons.wb_sunny : Icons.nights_stay,
-                  label:
-                      Get.isDarkMode ? "Enable lite mode" : "Enable dark mode",
-                  onTap: () {
-                    _controller.updateTheme();
-                    if (Get.isDarkMode) {
-                      Get.changeThemeMode(ThemeMode.light);
-                    } else {
-                      Get.changeThemeMode(ThemeMode.dark);
-                    }
-                  }),
+                  icon: Icons.nights_stay,
+                  label: "Enable dark mode",
+                  onTap: () {}),
               const Spacer(),
               Container(
                   height: 0.5,
                   width: SizeConfig.screenWidth * 0.7,
-                  color: textColor.withOpacity(0.5)),
+                  color: Colors.white.withOpacity(0.5)),
               SizedBox(
                   height: 60,
                   child: _button(

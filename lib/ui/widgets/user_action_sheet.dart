@@ -9,8 +9,8 @@ Future<dynamic> UserActionBTMSheet() {
       height: SizeConfig.screenHeight * 0.4,
       width: SizeConfig.screenWidth,
       padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Get.isDarkMode ? Colors.grey[850] : Colors.white,
+      decoration: const BoxDecoration(
+        color: Colors.white,
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(30),
           topRight: Radius.circular(30),

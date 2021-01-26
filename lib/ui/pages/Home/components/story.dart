@@ -4,7 +4,6 @@ import 'package:instagram/my_icons.dart';
 import 'package:instagram/ui/styles/colors.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
 import 'package:instagram/ui/widgets/profile_widget.dart';
-import 'package:get/get.dart';
 
 class StoryWidget extends StatelessWidget {
   final Story story;
@@ -21,22 +20,20 @@ class StoryWidget extends StatelessWidget {
           isMe
               ? Stack(
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       radius: 32,
-                      backgroundColor:
-                          Get.isDarkMode ? Colors.black : Colors.white,
+                      backgroundColor: Colors.white,
                       child: const CircleAvatar(
                         radius: 31,
                         backgroundImage: AssetImage("assets/images/dp.jpg"),
                       ),
                     ),
-                    Positioned(
+                    const Positioned(
                       bottom: 0,
                       right: 0,
                       child: CircleAvatar(
                         radius: 10,
-                        backgroundColor:
-                            Get.isDarkMode ? Colors.black : Colors.white,
+                        backgroundColor: Colors.white,
                         child: const CircleAvatar(
                           radius: 8.5,
                           backgroundColor: primaryColor,

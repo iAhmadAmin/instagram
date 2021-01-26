@@ -6,7 +6,7 @@ import 'package:instagram/ui/styles/textstyles.dart';
 
 class ActivityTile extends StatelessWidget {
   final Activity activity;
-  ActivityTile({@required this.activity});
+  const ActivityTile({@required this.activity});
 
   @override
   Widget build(BuildContext context) {

@@ -106,7 +106,7 @@ class PostTile extends StatelessWidget {
         child: Icon(
           icon,
           size: 22,
-          color: Get.isDarkMode ? Colors.white : Colors.black,
+          color: Colors.black,
         ),
       ),
       onTap: onTap,

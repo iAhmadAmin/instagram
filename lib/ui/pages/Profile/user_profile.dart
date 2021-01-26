@@ -6,7 +6,6 @@ import 'package:instagram/ui/pages/Profile/components.dart';
 import 'package:instagram/ui/styles/colors.dart';
 import 'package:get/get.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
-import 'package:instagram/ui/widgets/profile_widget.dart';
 import 'package:instagram/ui/widgets/user_action_sheet.dart';
 
 class UserProfilePage extends StatefulWidget {
@@ -18,13 +17,11 @@ class UserProfilePage extends StatefulWidget {
 }
 
 class _UserProfilePageState extends State<UserProfilePage> {
-  Color backgroundColor = Get.isDarkMode ? Colors.black : Colors.white;
-  Color textColor = Get.isDarkMode ? Colors.white : Colors.black;
   bool _showSuggestion = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           _appBar(),
@@ -36,8 +33,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
               text: TextSpan(
                 text: "Followed by ",
                 style: impBodyTextStyle.copyWith(
-                    fontWeight: FontWeight.w300,
-                    color: textColor.withOpacity(0.9)),
+                  fontWeight: FontWeight.w300,
+                  color: Colors.black.withOpacity(0.8),
+                ),
                 children: <TextSpan>[
                   TextSpan(
                       text:
@@ -48,7 +46,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     text: " and ",
                     style: impBodyTextStyle.copyWith(
                         fontWeight: FontWeight.w300,
-                        color: textColor.withOpacity(0.9)),
+                        color: Colors.black.withOpacity(0.8)),
                   ),
                   TextSpan(
                       text: "16 others",
@@ -75,12 +73,15 @@ class _UserProfilePageState extends State<UserProfilePage> {
   Widget _appBar() {
     return SliverAppBar(
         pinned: true,
-        backgroundColor: backgroundColor,
-        title: Text(widget.user.username),
+        backgroundColor: Colors.white,
+        title: Text(
+          widget.user.username,
+          style: const TextStyle(color: Colors.black),
+        ),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
-            color: textColor,
+            color: Colors.black,
           ),
           onPressed: () {
             Get.back();
@@ -88,16 +89,16 @@ class _UserProfilePageState extends State<UserProfilePage> {
         ),
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.notifications_none_outlined,
-              color: textColor,
+              color: Colors.black,
             ),
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.more_vert,
-              color: textColor,
+              color: Colors.black,
             ),
             onPressed: () {
               UserActionBTMSheet();
@@ -203,7 +204,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
       height: 200,
       width: 140,
       decoration: BoxDecoration(
-        border: Border.all(color: textColor.withOpacity(0.3)),
+        border: Border.all(color: Colors.white.withOpacity(0.3)),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(

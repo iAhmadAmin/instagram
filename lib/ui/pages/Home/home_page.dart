@@ -9,8 +9,6 @@ import '../../../my_icons.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
-  Color backgroundColor = Get.isDarkMode ? Colors.black : Colors.white;
-  Color textColor = Get.isDarkMode ? Colors.white : Colors.black;
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -25,17 +23,17 @@ class HomePage extends StatelessWidget {
   Widget _appBar() {
     return SliverAppBar(
       pinned: true,
-      backgroundColor: Get.isDarkMode ? Colors.black : Colors.white,
+      backgroundColor: Colors.white,
       title: Image.asset(
         "assets/images/insta_logo.png",
         height: 44,
-        color: Get.isDarkMode ? Colors.white : Colors.black,
+        color: Colors.black,
       ),
       actions: [
         IconButton(
-          icon: Icon(
+          icon: const Icon(
             MyIcons.messenger,
-            color: Get.isDarkMode ? Colors.white : Colors.black,
+            color: Colors.black,
           ),
           onPressed: () {},
         )
@@ -66,9 +64,7 @@ class HomePage extends StatelessWidget {
                   }),
             ),
             Divider(
-              color: Get.isDarkMode
-                  ? Colors.white.withOpacity(0.12)
-                  : Colors.black.withOpacity(0.12),
+              color: Colors.black.withOpacity(0.12),
             ),
           ],
         ),

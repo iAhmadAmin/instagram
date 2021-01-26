@@ -75,7 +75,7 @@ Widget _counter({@required String count, @required String label}) {
       Text(
         count,
         style: impBodyTextStyle.copyWith(
-            fontSize: 22, fontWeight: FontWeight.w600),
+            color: Colors.black, fontSize: 22, fontWeight: FontWeight.w600),
       ),
       const SizedBox(
         height: 4,
@@ -96,34 +96,21 @@ Widget button(
     @required double width,
     @required Function onTap}) {
   return GestureDetector(
-    onTap: onTap,
-    child: GetBuilder<MainController>(
-      builder: (value) {
-        return Container(
-          height: height,
-          width: width,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: isFilled
-                  ? primaryColor
-                  : value.isDark
-                      ? Colors.white.withOpacity(0.5)
-                      : Colors.black.withOpacity(0.5),
-            ),
-            color: isFilled
-                ? primaryColor
-                : value.isDark
-                    ? Colors.black
-                    : Colors.white,
-            borderRadius: BorderRadius.circular(6),
+      onTap: onTap,
+      child: Container(
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: isFilled ? primaryColor : Colors.black.withOpacity(0.5),
           ),
-          child: Center(
-            child: child,
-          ),
-        );
-      },
-    ),
-  );
+          color: isFilled ? primaryColor : Colors.white,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Center(
+          child: child,
+        ),
+      ));
 }
 
 Widget postGrid() {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/core/models/story.dart';
 import 'package:instagram/ui/styles/colors.dart';
-import 'package:get/get.dart';
 
 class ProfileWidget extends StatelessWidget {
   final Story story;
@@ -24,10 +23,7 @@ class ProfileWidget extends StatelessWidget {
                   ? story.isViewed
                       ? [Colors.grey, Colors.grey]
                       : instaGrad.colors
-                  : [
-                      Get.isDarkMode ? Colors.black : Colors.white,
-                      Get.isDarkMode ? Colors.black : Colors.white
-                    ]),
+                  : [Colors.white, Colors.white]),
           //color: Colors.white
         ),
         child: CircleAvatar(
@@ -36,7 +32,7 @@ class ProfileWidget extends StatelessWidget {
                   ? size
                   : size - 1
               : size,
-          backgroundColor: Get.isDarkMode ? Colors.black : Colors.white,
+          backgroundColor: Colors.white,
           child: CircleAvatar(
             radius: size < 30 ? size - 1 : size - 3,
             backgroundImage: AssetImage(
