@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram/core/controllers/main_controller.dart';
 import 'package:instagram/core/models/data.dart';
 import 'package:instagram/core/models/user.dart';
 import 'package:instagram/sizeconfig.dart';
@@ -27,43 +28,45 @@ List<String> photos = [
 
 Widget infoBar({@required User user, @required Widget widget}) {
   return SliverToBoxAdapter(
-    child: Container(
-        padding: const EdgeInsets.only(left: 12, right: 26),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Hero(
-                  tag: user.username,
-                  child: ProfileWidget(
-                    onTap: () {},
-                    size: 48,
-                    story: stories.singleWhere(
-                        (story) => story.username == user.username,
-                        orElse: () => null),
+      child: Container(
+          padding: const EdgeInsets.only(left: 12, right: 26),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Hero(
+                    tag: user.username,
+                    child: ProfileWidget(
+                      onTap: () {},
+                      size: 48,
+                      story: stories.singleWhere(
+                          (story) => story.username == user.username,
+                          orElse: () => null),
+                    ),
                   ),
-                ),
-                _counter(count: user.post.toString(), label: "Posts"),
-                _counter(count: user.followers.toString(), label: "Followers"),
-                _counter(count: user.following.toString(), label: "Following"),
-              ],
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Text(
-              user.name,
-              style: subHeadingTextStyle.copyWith(fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(
-              height: 4,
-            ),
-            widget,
-          ],
-        )),
-  );
+                  _counter(count: user.post.toString(), label: "Posts"),
+                  _counter(
+                      count: user.followers.toString(), label: "Followers"),
+                  _counter(
+                      count: user.following.toString(), label: "Following"),
+                ],
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Text(
+                user.name,
+                style:
+                    subHeadingTextStyle.copyWith(fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              widget,
+            ],
+          )));
 }
 
 Widget _counter({@required String count, @required String label}) {
@@ -94,27 +97,31 @@ Widget button(
     @required Function onTap}) {
   return GestureDetector(
     onTap: onTap,
-    child: Container(
-      height: height,
-      width: width,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: isFilled
-              ? primaryColor
-              : Get.isDarkMode
-                  ? Colors.white.withOpacity(0.5)
-                  : Colors.black.withOpacity(0.5),
-        ),
-        color: isFilled
-            ? primaryColor
-            : Get.isDarkMode
-                ? Colors.black
-                : Colors.white,
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: Center(
-        child: child,
-      ),
+    child: GetBuilder<MainController>(
+      builder: (value) {
+        return Container(
+          height: height,
+          width: width,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: isFilled
+                  ? primaryColor
+                  : value.isDark
+                      ? Colors.white.withOpacity(0.5)
+                      : Colors.black.withOpacity(0.5),
+            ),
+            color: isFilled
+                ? primaryColor
+                : value.isDark
+                    ? Colors.black
+                    : Colors.white,
+            borderRadius: BorderRadius.circular(6),
+          ),
+          child: Center(
+            child: child,
+          ),
+        );
+      },
     ),
   );
 }

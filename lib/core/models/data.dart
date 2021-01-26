@@ -1,3 +1,4 @@
+import 'package:instagram/core/models/activity.dart';
 import 'package:instagram/core/models/post.dart';
 import 'package:instagram/core/models/story.dart';
 import 'package:instagram/core/models/user.dart';
@@ -158,4 +159,38 @@ List searchImages = [
   "https://images.unsplash.com/photo-1500336624523-d727130c3328?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
   "https://images.unsplash.com/photo-1504933350103-e840ede978d4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
   "https://images.unsplash.com/photo-1467632499275-7a693a761056?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+];
+
+List<Activity> activities = [
+  Activity(
+    userDp: "assets/images/1.jpg",
+    userName: "user_raw",
+    notification: "started following you.",
+    time: "4 h",
+  ),
+  Activity(
+    userDp: "assets/images/2.jpg",
+    userName: "ajef_asf",
+    notification: "started following you.",
+    time: "6 h",
+  ),
+  Activity(
+    userDp: "assets/images/3.jpg",
+    userName: "another_user",
+    notification: "who you might know, is on instagramm.",
+    time: "2 d",
+    isFollower: false,
+  ),
+  Activity(
+    userDp: "assets/images/4.jpg",
+    userName: "user_raw",
+    notification: "started following you",
+    time: "2 d",
+  ),
+  Activity(
+      userDp: "assets/images/5.jpg",
+      userName: "insta_user",
+      notification: "who you might know, is on instagramm.",
+      isFollower: false,
+      time: "4 d"),
 ];

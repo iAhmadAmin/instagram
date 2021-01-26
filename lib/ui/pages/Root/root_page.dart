@@ -4,6 +4,7 @@ import 'package:instagram/core/controllers/main_controller.dart';
 import 'package:instagram/my_icons.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/pages/Activity/activity_page.dart';
+import 'package:instagram/ui/pages/AddPost/add_post_page.dart';
 import 'package:instagram/ui/pages/Home/home_page.dart';
 import 'package:instagram/ui/pages/Profile/my_profile.dart';
 import 'package:instagram/ui/pages/Profile/setting_page.dart';
@@ -17,13 +18,14 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> {
   final MainController _controller = Get.put(MainController());
+
   Color textColor = Get.isDarkMode ? Colors.white : Colors.black;
   int _selectedTab = 0;
 
   final List<Widget> _pages = [
     HomePage(),
     SearchPage(),
-    Container(),
+    AddPostPage(),
     ActivityPage(),
     MyProfilePage(),
   ];
@@ -178,6 +180,7 @@ class _RootPageState extends State<RootPage> {
                   label:
                       Get.isDarkMode ? "Enable lite mode" : "Enable dark mode",
                   onTap: () {
+                    _controller.updateTheme();
                     if (Get.isDarkMode) {
                       Get.changeThemeMode(ThemeMode.light);
                     } else {
@@ -195,6 +198,7 @@ class _RootPageState extends State<RootPage> {
                       icon: Icons.settings,
                       label: "Settings",
                       onTap: () {
+                        _controller.controlMenu();
                         Get.to(SettingPage());
                       }))
             ],

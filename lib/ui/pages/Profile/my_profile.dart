@@ -71,30 +71,35 @@ class MyProfilePage extends StatelessWidget {
   }
 
   Widget _appBar() {
-    return SliverAppBar(
-        pinned: true,
-        backgroundColor: Get.isDarkMode ? Colors.black : Colors.white,
-        title: Text(
-          user.username,
-          style: TextStyle(color: Get.isDarkMode ? Colors.white : Colors.black),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.add,
-              color: textColor,
+    return GetBuilder<MainController>(
+      builder: (value) {
+        return SliverAppBar(
+            pinned: true,
+            backgroundColor: _controller.isDark ? Colors.black : Colors.white,
+            title: Text(
+              user.username,
+              style: TextStyle(
+                  color: _controller.isDark ? Colors.white : Colors.black),
             ),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.menu,
-              color: Get.isDarkMode ? Colors.white : Colors.black,
-            ),
-            onPressed: () {
-              _controller.controlMenu();
-            },
-          )
-        ]);
+            actions: [
+              IconButton(
+                icon: Icon(
+                  Icons.add,
+                  color: _controller.isDark ? Colors.white : Colors.black,
+                ),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.menu,
+                  color: _controller.isDark ? Colors.white : Colors.black,
+                ),
+                onPressed: () {
+                  _controller.controlMenu();
+                },
+              )
+            ]);
+      },
+    );
   }
 }
