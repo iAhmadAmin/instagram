@@ -5,6 +5,8 @@ import 'package:instagram/core/models/story.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/pages/Home/components/post_tile.dart';
 import 'package:instagram/ui/pages/Home/components/story.dart';
+import 'package:instagram/ui/pages/Messenger/messenger_page.dart';
+import 'package:instagram/ui/widgets/suggestion_bar.dart';
 import '../../../my_icons.dart';
 import 'package:get/get.dart';
 
@@ -35,7 +37,9 @@ class HomePage extends StatelessWidget {
             MyIcons.messenger,
             color: Colors.black,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Get.to(MessengerPage());
+          },
         )
       ],
     );
@@ -77,6 +81,7 @@ class HomePage extends StatelessWidget {
       delegate: SliverChildBuilderDelegate(
         (context, index) {
           final Post post = posts[index];
+
           return PostTile(post: post);
         },
         childCount: posts.length,

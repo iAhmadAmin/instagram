@@ -167,9 +167,25 @@ class PostTile extends StatelessWidget {
           const SizedBox(
             width: 6,
           ),
-          Text(
-            "Add a comment...",
-            style: captionTextStyle,
+          Expanded(
+            child: TextFormField(
+              decoration: const InputDecoration(
+                hintText: "Add a comment...",
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.white,
+                    width: 0,
+                  ),
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.white10,
+                    width: 0,
+                  ),
+                ),
+              ),
+              style: captionTextStyle,
+            ),
           ),
           const Spacer(),
           const Text("👌   😂   ➕ ")

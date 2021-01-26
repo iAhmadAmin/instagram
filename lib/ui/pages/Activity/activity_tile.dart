@@ -38,6 +38,9 @@ class ActivityTile extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(
+            width: 10,
+          ),
           activity.isFollower
               ? const SizedBox()
               : button(

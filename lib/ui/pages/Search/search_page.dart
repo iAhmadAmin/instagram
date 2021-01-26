@@ -6,7 +6,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:instagram/ui/pages/Profile/components.dart';
 import 'package:instagram/ui/pages/Search/category_item.dart';
 import 'package:instagram/ui/widgets/search_bar.dart';
-import 'package:get/get.dart';
 
 class SearchPage extends StatelessWidget {
   @override

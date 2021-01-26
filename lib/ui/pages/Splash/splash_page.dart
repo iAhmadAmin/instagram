@@ -47,6 +47,7 @@ class _SplashPageState extends State<SplashPage> {
               Text(
                 "FACEBOOK",
                 style: TextStyle(
+                    letterSpacing: 0.6,
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                     foreground: Paint()..shader = linearGradient),

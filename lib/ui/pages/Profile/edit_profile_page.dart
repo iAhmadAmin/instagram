@@ -8,8 +8,6 @@ import 'package:get/get.dart';
 class EditProfilePage extends StatelessWidget {
   final User user;
   EditProfilePage({@required this.user});
-  Color backgroundColor = Get.isDarkMode ? Colors.black : Colors.white;
-  Color textColor = Get.isDarkMode ? Colors.white : Colors.black;
   TextEditingController _nameTextController = TextEditingController();
   TextEditingController _usernameTextController = TextEditingController();
   TextEditingController _bioTextController = TextEditingController();
@@ -23,15 +21,14 @@ class EditProfilePage extends StatelessWidget {
     _websiteTextController.text = user.website;
 
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: backgroundColor,
+        backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme:
-            IconThemeData(color: Get.isDarkMode ? Colors.white : Colors.black),
-        title: Text(
+        iconTheme: const IconThemeData(color: Colors.black),
+        title: const Text(
           "Edit Profile",
-          style: TextStyle(color: Get.isDarkMode ? Colors.white : Colors.black),
+          style: TextStyle(color: Colors.black),
         ),
         leading: IconButton(
             icon: const Icon(Icons.close),
