@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/core/models/user.dart';
-import 'package:instagram/my_icons.dart';
 import 'package:instagram/sizeconfig.dart';
+import 'package:instagram/my_icons.dart';
 import 'package:instagram/ui/pages/Messenger/chat_screen.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
 import 'package:get/get.dart';
@@ -19,7 +19,7 @@ class MessageTile extends StatelessWidget {
         ));
       },
       child: Container(
-        height: 70,
+        // height: 70,
         width: SizeConfig.screenWidth,
         margin: const EdgeInsets.symmetric(vertical: 8),
         padding: const EdgeInsets.symmetric(horizontal: 20),

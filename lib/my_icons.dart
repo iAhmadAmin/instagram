@@ -36,10 +36,6 @@
 ///         Author:    Designmodo for Smashing Magazine
 ///         License:   CC BY ()
 ///         Homepage:  http://designmodo.com/linecons-free/
-/// * Linearicons Free, Copyright (C) Linearicons.com
-///         Author:    Perxis
-///         License:   CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
-///         Homepage:  https://linearicons.com
 /// * Octicons, Copyright (C) 2020 by GitHub Inc.
 ///         Author:    GitHub
 ///         License:   MIT (http://opensource.org/licenses/mit-license.php)
@@ -116,10 +112,6 @@ class MyIcons {
     0xe80e,
     fontFamily: _kFontFam,
   );
-  static const IconData archive = IconData(
-    0xe80f,
-    fontFamily: _kFontFam,
-  );
   static const IconData activity = IconData(
     0xe810,
     fontFamily: _kFontFam,
@@ -132,12 +124,8 @@ class MyIcons {
     0xe812,
     fontFamily: _kFontFam,
   );
-  static const IconData edit = IconData(
+  static const IconData camera_filled = IconData(
     0xe813,
-    fontFamily: _kFontFam,
-  );
-  static const IconData account = IconData(
-    0xe814,
     fontFamily: _kFontFam,
   );
   static const IconData lock_outline = IconData(
@@ -172,19 +160,31 @@ class MyIcons {
     0xe81c,
     fontFamily: _kFontFam,
   );
-  static const IconData photo = IconData(
-    0xe81d,
+  static const IconData camera = IconData(
+    0xe81e,
     fontFamily: _kFontFam,
   );
-  static const IconData camera = IconData(
-    0xe826,
+  static const IconData edit = IconData(
+    0xe81f,
+    fontFamily: _kFontFam,
+  );
+  static const IconData photo = IconData(
+    0xe820,
+    fontFamily: _kFontFam,
+  );
+  static const IconData account = IconData(
+    0xe821,
+    fontFamily: _kFontFam,
+  );
+  static const IconData user = IconData(
+    0xe822,
     fontFamily: _kFontFam,
   );
   static const IconData bookmark = IconData(
     0xf097,
     fontFamily: _kFontFam,
   );
-  static const IconData archive_1 = IconData(
+  static const IconData archive = IconData(
     0xf375,
     fontFamily: _kFontFam,
   );

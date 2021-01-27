@@ -3,6 +3,7 @@ import 'package:instagram/core/models/data.dart';
 import 'package:instagram/core/models/user.dart';
 import 'package:get/get.dart';
 import 'package:instagram/my_icons.dart';
+import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/widgets/profile_widget.dart';
 
 class ChatScreen extends StatelessWidget {
@@ -58,13 +59,13 @@ class ChatScreen extends StatelessWidget {
   }
 
   Widget _chatBar() {
-    return Expanded(
-        child: Container(
-      color: Colors.yellow,
-    ));
+    return Expanded(child: Container());
   }
 
   Widget _writeMessageBar() {
-    return Container();
+    return Container(
+      height: 60,
+      width: SizeConfig.screenWidth,
+    );
   }
 }
