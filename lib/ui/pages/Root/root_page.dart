@@ -10,6 +10,7 @@ import 'package:instagram/ui/pages/Profile/my_profile.dart';
 import 'package:instagram/ui/pages/Profile/setting_page.dart';
 import 'package:instagram/ui/pages/Search/search_page.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
+import 'package:photo_manager/photo_manager.dart';
 
 class RootPage extends StatefulWidget {
   @override
@@ -24,7 +25,6 @@ class _RootPageState extends State<RootPage> {
   final List<Widget> _pages = [
     HomePage(),
     SearchPage(),
-    AddPostPage(),
     ActivityPage(),
     MyProfilePage(),
   ];
@@ -90,7 +90,7 @@ class _RootPageState extends State<RootPage> {
           ),
           _buildItem(
             icon: _selectedTab == 3 ? MyIcons.heart_active : MyIcons.heart,
-            index: 3,
+            index: 2,
           ),
           _profileButton(),
         ],
@@ -106,11 +106,21 @@ class _RootPageState extends State<RootPage> {
       return IconButton(
         onPressed: controller.isMenuOpened
             ? () {}
-            : () {
-                setState(() {
-                  _selectedTab = index;
-                });
-              },
+            : index == 2
+                ? () async {
+                    final result = await PhotoManager.requestPermission();
+                    if (result) {
+                      Get.to(AddPostPage());
+                    } else {
+                      // fail
+                      /// if result is fail, you can call `PhotoManager.openSetting();`  to open android/ios applicaton's setting to get permission
+                    }
+                  }
+                : () {
+                    setState(() {
+                      _selectedTab = index;
+                    });
+                  },
         icon: Icon(icon, color: Colors.black),
       );
     });

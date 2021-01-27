@@ -1,4 +1,5 @@
 import 'package:instagram/core/models/activity.dart';
+import 'package:instagram/core/models/message.dart';
 import 'package:instagram/core/models/post.dart';
 import 'package:instagram/core/models/story.dart';
 import 'package:instagram/core/models/user.dart';
@@ -193,4 +194,49 @@ List<Activity> activities = [
       notification: "who you might know, is on instagramm.",
       isFollower: false,
       time: "4 d"),
+];
+
+List<MessageModel> messagesList = [
+  MessageModel(
+    dp: "assets/images/dp.jpg",
+    message:
+        "Lorem ipsum, and tother thing is thta thewy iell noka whtk its time,a dn tyo lte.",
+  ),
+  MessageModel(
+    dp: "assets/images/dp.jpg",
+    message: "I was going to marktet then is aw wsd somthing terible",
+  ),
+  MessageModel(
+    dp: "assets/images/dp.jpg",
+    message: "OMG, how it gappend?",
+  ),
+  MessageModel(
+    dp: "assets/images/dp.jpg",
+    message: "Hey i am developing instagram ui in flutter.",
+    isMe: true,
+  ),
+  MessageModel(
+    dp: "assets/images/dp.jpg",
+    message: "I will share it with you once it done.",
+    isMe: true,
+  ),
+  MessageModel(
+    dp: "assets/images/dp.jpg",
+    message: "Wow that;s nice",
+  ),
+  MessageModel(
+    dp: "assets/images/dp.jpg",
+    message:
+        "BTW i have checked your previous work on github, you are doing a great job bro,keep it up.",
+  ),
+  MessageModel(
+    dp: "assets/images/dp.jpg",
+    message: "Thanks man it means alot to me.",
+    isMe: true,
+  ),
+  MessageModel(
+    dp: "assets/images/dp.jpg",
+    message: "see you soon, Good Bye",
+    isMe: true,
+  ),
 ];
