@@ -1,6 +1,10 @@
 # instagram
+Instagram UI (Soon will do backend & missing screens also).
+If you like my work then don't forget to start the repo and follow me.
+You can buy me a cup of coffee : Payoneer: ammyhunn@gmail.com
 
-A new Flutter project.
+![InShot_20210128_193325400](https://user-images.githubusercontent.com/48145486/106153059-f438f580-619f-11eb-855f-a42eab4c378c.jpg)
+![InShot_20210128_193157029](https://user-images.githubusercontent.com/48145486/106153126-07e45c00-61a0-11eb-8298-28b977369e49.jpg)
 
 ## Getting Started
 
