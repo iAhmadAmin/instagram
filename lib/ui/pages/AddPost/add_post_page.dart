@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/ui/pages/AddPost/image.dart';
 import 'package:instagram/ui/styles/colors.dart';
 import 'package:get/get.dart';
 
@@ -39,7 +38,9 @@ class _AddPostPageState extends State<AddPostPage> {
           ),
         ],
       ),
-      body: Images(),
+      body: const Center(
+        child: Text("Will Code this page soon."),
+      ),
     );
   }
 }
