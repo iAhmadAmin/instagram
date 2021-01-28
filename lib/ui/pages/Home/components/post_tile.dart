@@ -91,11 +91,13 @@ class _PostTileState extends State<PostTile> {
     return GestureDetector(
       onDoubleTap: () {
         setState(() {
-          widget.post.likePost();
+          flareControls.play("like");
+          widget.post.isLiked ? null : widget.post.likePost();
         });
       },
       child: Container(
           child: Stack(
+        alignment: Alignment.center,
         children: [
           Image.asset(widget.post.postAsset),
           SizedBox(

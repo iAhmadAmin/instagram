@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/ui/pages/AddPost/image.dart';
 import 'package:instagram/ui/styles/colors.dart';
 import 'package:get/get.dart';
 
@@ -38,10 +39,7 @@ class _AddPostPageState extends State<AddPostPage> {
           ),
         ],
       ),
-      body: Center(
-        // Modify this line as follows
-        child: Text('There are  assets'),
-      ),
+      body: Images(),
     );
   }
 }

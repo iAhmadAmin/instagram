@@ -24,6 +24,7 @@ class _RootPageState extends State<RootPage> {
   final List<Widget> _pages = [
     HomePage(),
     SearchPage(),
+    Container(),
     ActivityPage(),
     MyProfilePage(),
   ];
@@ -89,7 +90,7 @@ class _RootPageState extends State<RootPage> {
           ),
           _buildItem(
             icon: _selectedTab == 3 ? MyIcons.heart_active : MyIcons.heart,
-            index: 2,
+            index: 3,
           ),
           _profileButton(),
         ],
