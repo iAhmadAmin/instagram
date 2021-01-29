@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/ui/pages/Auth/login_page.dart';
 import 'package:instagram/ui/pages/Splash/splash_page.dart';
 import 'package:get/get.dart';
 
