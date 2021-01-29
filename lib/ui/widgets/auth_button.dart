@@ -7,10 +7,13 @@ class AuthButton extends StatelessWidget {
   final Function onTap;
   final String label;
   final bool isLoading;
-  final Widget loader;
 
-  AuthButton(
-      {this.btnClr, this.onTap, this.label, this.isLoading, this.loader});
+  const AuthButton({
+    this.btnClr,
+    this.onTap,
+    this.label,
+    this.isLoading = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +25,12 @@ class AuthButton extends StatelessWidget {
         decoration: BoxDecoration(
             color: btnClr, borderRadius: BorderRadius.circular(8.0)),
         child: Center(
-          child: isLoading == false || isLoading == null
+          child: !isLoading
               ? Text(label,
                   style: impBodyTextStyle.copyWith(color: Colors.white))
-              : loader,
+              : const CircularProgressIndicator(
+                  backgroundColor: Colors.white,
+                ),
         ),
       ),
     );

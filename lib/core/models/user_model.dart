@@ -1,4 +1,4 @@
-class User {
+class UserModel {
   final String username;
   String userDp;
   int post;
@@ -7,13 +7,17 @@ class User {
   String name;
   String website;
   String bio;
+  String password;
+  String email;
 
-  User(
+  UserModel(
       {this.followers,
+      this.email,
       this.following,
       this.bio,
       this.website,
       this.name,
+      this.password,
       this.post,
       this.userDp,
       this.username});

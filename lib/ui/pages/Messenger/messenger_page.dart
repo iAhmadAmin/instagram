@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram/core/models/data.dart';
-import 'package:instagram/core/models/user.dart';
+import 'package:instagram/core/models/user_model.dart';
 import 'package:instagram/my_icons.dart';
 import 'package:instagram/ui/pages/Messenger/message_tile.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
@@ -48,7 +48,7 @@ class MessengerPage extends StatelessWidget {
               child: ListView.builder(
                   itemCount: users.length,
                   itemBuilder: (context, index) {
-                    final User user = users[index];
+                    final UserModel user = users[index];
                     return MessageTile(user: user);
                   })),
         ],

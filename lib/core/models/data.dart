@@ -2,7 +2,7 @@ import 'package:instagram/core/models/activity.dart';
 import 'package:instagram/core/models/message.dart';
 import 'package:instagram/core/models/post.dart';
 import 'package:instagram/core/models/story.dart';
-import 'package:instagram/core/models/user.dart';
+import 'package:instagram/core/models/user_model.dart';
 
 List<Story> stories = [
   Story(
@@ -95,8 +95,8 @@ List<Post> posts = [
   ),
 ];
 
-List<User> users = [
-  User(
+List<UserModel> users = [
+  UserModel(
     username: "user_1232",
     userDp: "assets/images/1.jpg",
     name: "Aalia Nay",
@@ -104,7 +104,7 @@ List<User> users = [
     followers: 234,
     following: 113,
   ),
-  User(
+  UserModel(
     username: "random_user",
     userDp: "assets/images/4.jpg",
     name: "Walther White",
@@ -112,7 +112,7 @@ List<User> users = [
     followers: 23,
     following: 213,
   ),
-  User(
+  UserModel(
     username: "odl_user123",
     userDp: "assets/images/3.jpg",
     name: "Oldy John",
@@ -120,7 +120,7 @@ List<User> users = [
     followers: 234,
     following: 113,
   ),
-  User(
+  UserModel(
     username: "new_user",
     userDp: "assets/images/2.jpg",
     name: "Smith Warn",

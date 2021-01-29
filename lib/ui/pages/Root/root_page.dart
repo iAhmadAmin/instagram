@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram/core/controllers/main_controller.dart';
+import 'package:instagram/core/services/auth_service.dart';
 import 'package:instagram/my_icons.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/pages/Activity/activity_page.dart';
@@ -17,7 +18,7 @@ class RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<RootPage> {
-  final MainController _controller = Get.put(MainController());
+  final MainController _controller = Get.find<MainController>();
 
   int _selectedTab = 0;
 
@@ -171,9 +172,11 @@ class _RootPageState extends State<RootPage> {
               _button(icon: MyIcons.star, label: "Close friends"),
               _button(icon: MyIcons.add_people, label: "Discover people"),
               _button(
-                  icon: Icons.nights_stay,
-                  label: "Enable dark mode",
-                  onTap: () {}),
+                  icon: Icons.logout,
+                  label: "Sign Out",
+                  onTap: () async {
+                    AuthService().signOut();
+                  }),
               const Spacer(),
               Container(
                   height: 0.5,

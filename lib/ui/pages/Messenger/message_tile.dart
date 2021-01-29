@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/core/models/user.dart';
+import 'package:instagram/core/models/user_model.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/my_icons.dart';
 import 'package:instagram/ui/pages/Messenger/chat_screen.dart';
@@ -7,7 +7,7 @@ import 'package:instagram/ui/styles/textstyles.dart';
 import 'package:get/get.dart';
 
 class MessageTile extends StatelessWidget {
-  final User user;
+  final UserModel user;
 
   const MessageTile({this.user});
   @override

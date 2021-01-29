@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/core/services/auth_service.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/pages/Auth/signup_page.dart';
 import 'package:instagram/ui/styles/colors.dart';
@@ -13,8 +14,8 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       backgroundColor: Colors.white,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,6 +42,7 @@ class LoginPage extends StatelessWidget {
               ),
               InputField(
                 controller: _passwordController,
+                isPassField: true,
                 hint: "Password",
               ),
               const SizedBox(
@@ -49,7 +51,9 @@ class LoginPage extends StatelessWidget {
               AuthButton(
                 btnClr: primaryColor,
                 label: "Log In",
-                onTap: () {},
+                onTap: () {
+                  _validate();
+                },
               ),
               _divider(),
               AuthButton(
@@ -114,5 +118,16 @@ class LoginPage extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  _validate() {
+    if (_emailController.text.isNotEmpty &&
+        _passwordController.text.isNotEmpty) {
+      AuthService().signin(
+          email: _emailController.text, password: _passwordController.text);
+    } else {
+      Get.snackbar("Required*", "All fields are required.",
+          snackPosition: SnackPosition.BOTTOM);
+    }
   }
 }

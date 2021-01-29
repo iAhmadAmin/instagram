@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/core/models/data.dart';
-import 'package:instagram/core/models/user.dart';
+import 'package:instagram/core/models/user_model.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/pages/Profile/components.dart';
 import 'package:instagram/ui/styles/colors.dart';
@@ -10,7 +10,7 @@ import 'package:instagram/ui/widgets/suggestion_bar.dart';
 import 'package:instagram/ui/widgets/user_action_sheet.dart';
 
 class UserProfilePage extends StatefulWidget {
-  final User user;
+  final UserModel user;
   UserProfilePage({@required this.user});
 
   @override

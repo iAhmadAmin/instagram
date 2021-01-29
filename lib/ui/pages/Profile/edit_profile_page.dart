@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/core/models/user.dart';
+import 'package:instagram/core/models/user_model.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/styles/colors.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
 import 'package:get/get.dart';
 
 class EditProfilePage extends StatelessWidget {
-  final User user;
+  final UserModel user;
   EditProfilePage({@required this.user});
   TextEditingController _nameTextController = TextEditingController();
   TextEditingController _usernameTextController = TextEditingController();

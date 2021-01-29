@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:instagram/core/controllers/main_controller.dart';
+import 'package:instagram/core/services/local_storage.dart';
 import 'package:instagram/sizeconfig.dart';
+import 'package:instagram/ui/pages/Auth/login_page.dart';
 import 'package:instagram/ui/styles/colors.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
 import 'package:get/get.dart';
@@ -12,13 +15,16 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  final MainController _controller = Get.put(MainController());
+
   final Shader linearGradient =
       instaGrad.createShader(const Rect.fromLTWH(0, 0, 200, 40));
 
   @override
   void initState() {
     Timer(const Duration(seconds: 2), () {
-      Get.off(RootPage());
+      final bool isLogedIn = LocalStorage().isLogedIn();
+      Get.off(isLogedIn ? RootPage() : LoginPage());
     });
     super.initState();
   }
@@ -48,8 +54,8 @@ class _SplashPageState extends State<SplashPage> {
                 "FACEBOOK",
                 style: TextStyle(
                     letterSpacing: 0.6,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
                     foreground: Paint()..shader = linearGradient),
               ),
             ]),

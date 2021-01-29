@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/core/models/data.dart';
-import 'package:instagram/core/models/user.dart';
+import 'package:instagram/core/models/user_model.dart';
 import 'package:get/get.dart';
 import 'package:instagram/my_icons.dart';
 import 'package:instagram/sizeconfig.dart';
@@ -11,7 +11,7 @@ import 'package:instagram/ui/widgets/profile_widget.dart';
 class ChatScreen extends StatelessWidget {
   final List<MessageBubble> messageBubbles = [];
 
-  final User user;
+  final UserModel user;
   ChatScreen({this.user});
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/core/models/data.dart';
-import 'package:instagram/core/models/user.dart';
+import 'package:instagram/core/models/user_model.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/pages/Profile/components.dart';
 import 'package:instagram/ui/styles/colors.dart';
@@ -39,7 +39,7 @@ class SuggestionBar extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: users.length,
                 itemBuilder: (context, index) {
-                  final User user = users[index];
+                  final UserModel user = users[index];
                   return _miniUserProfile(user: user);
                 }),
           ),
@@ -51,7 +51,7 @@ class SuggestionBar extends StatelessWidget {
     );
   }
 
-  Widget _miniUserProfile({@required User user}) {
+  Widget _miniUserProfile({@required UserModel user}) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 4),
       padding: const EdgeInsets.all(8),

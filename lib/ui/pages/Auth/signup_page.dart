@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/core/controllers/main_controller.dart';
+import 'package:instagram/core/models/user_model.dart';
+import 'package:instagram/core/services/auth_service.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/pages/Auth/login_page.dart';
 import 'package:instagram/ui/styles/colors.dart';
@@ -12,6 +15,7 @@ class SignupPage extends StatelessWidget {
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _nameController = TextEditingController();
   TextEditingController _usernameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,11 +66,16 @@ class SignupPage extends StatelessWidget {
                   const SizedBox(
                     height: 22,
                   ),
-                  AuthButton(
-                    btnClr: primaryColor,
-                    label: "Sign up",
-                    onTap: () {},
-                  ),
+                  GetBuilder<MainController>(builder: (value) {
+                    return AuthButton(
+                      btnClr: primaryColor,
+                      label: "Sign up",
+                      isLoading: value.isLoading,
+                      onTap: () {
+                        _validate();
+                      },
+                    );
+                  }),
                   const SizedBox(
                     height: 22,
                   ),
@@ -102,5 +111,22 @@ class SignupPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  _validate() {
+    if (_nameController.text.isNotEmpty &&
+        _emailController.text.isNotEmpty &&
+        _usernameController.text.isNotEmpty &&
+        _passwordController.text.isNotEmpty) {
+      AuthService().signup(
+          userModel: UserModel(
+              username: _usernameController.text,
+              name: _nameController.text,
+              email: _emailController.text,
+              password: _passwordController.text));
+    } else {
+      Get.snackbar("Required*", "All fields are required.",
+          snackPosition: SnackPosition.BOTTOM);
+    }
   }
 }

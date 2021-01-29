@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/core/controllers/main_controller.dart';
 import 'package:instagram/core/models/data.dart';
-import 'package:instagram/core/models/user.dart';
+import 'package:instagram/core/models/user_model.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/styles/colors.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
@@ -26,7 +26,7 @@ List<String> photos = [
   "assets/images/5.jpg",
 ];
 
-Widget infoBar({@required User user, @required Widget widget}) {
+Widget infoBar({@required UserModel user, @required Widget widget}) {
   return SliverToBoxAdapter(
       child: Container(
           padding: const EdgeInsets.only(left: 12, right: 26),
