@@ -40,4 +40,18 @@ class Database {
       print(e);
     }
   }
+
+  Future<void> updateUserData({@required UserModel userModel}) async {
+    await _firestore
+        .collection("users")
+        .doc(userModel.email)
+        .update({
+          'username': userModel.username,
+          'website': userModel.website,
+          'name': userModel.name,
+          'bio': userModel.bio,
+        })
+        .then((value) => print("User Updated"))
+        .catchError((error) => print("Failed to update user: $error"));
+  }
 }

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram/core/controllers/main_controller.dart';
+import 'package:instagram/core/controllers/user_controller.dart';
 import 'package:instagram/core/services/auth_service.dart';
+import 'package:instagram/core/services/database.dart';
+import 'package:instagram/core/services/local_storage.dart';
 import 'package:instagram/my_icons.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/pages/Activity/activity_page.dart';
@@ -19,6 +22,7 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> {
   final MainController _controller = Get.find<MainController>();
+  final UserController _userController = Get.find<UserController>();
 
   int _selectedTab = 0;
 
@@ -175,6 +179,8 @@ class _RootPageState extends State<RootPage> {
                   icon: Icons.logout,
                   label: "Sign Out",
                   onTap: () async {
+                    _controller.controlMenu();
+
                     AuthService().signOut();
                   }),
               const Spacer(),

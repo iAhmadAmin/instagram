@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:instagram/core/controllers/main_controller.dart';
 import 'package:instagram/core/controllers/user_controller.dart';
 import 'package:instagram/core/models/user_model.dart';
+import 'package:instagram/core/services/database.dart';
+import 'package:instagram/core/services/local_storage.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/pages/Profile/components.dart';
 import 'package:instagram/ui/pages/Profile/edit_profile_page.dart';
@@ -9,70 +11,88 @@ import 'package:instagram/ui/styles/colors.dart';
 import 'package:get/get.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
 
-class MyProfilePage extends StatelessWidget {
+class MyProfilePage extends StatefulWidget {
+  @override
+  _MyProfilePageState createState() => _MyProfilePageState();
+}
+
+class _MyProfilePageState extends State<MyProfilePage> {
   final MainController _controller = Get.find<MainController>();
-  final UserModel user = UserModel(
-    username: "i_ahmadamin",
-    userDp: "assets/images/dp.jpg",
-    name: "Ahmad Amin",
-    post: 141,
-    followers: 23,
-    following: 213,
-    website: "http://github.com/iahmadamin",
-    bio: "Programmer\nStudent\nFlutter Developer",
-  );
+
+  final UserController _userController = Get.find<UserController>();
+
+  bool isLoading = false;
+  UserModel user;
+
+  _getUserData() async {
+    isLoading = true;
+    _userController.user =
+        await Database().getUserData(email: LocalStorage().getUserEmail());
+    user = _userController.user;
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserData();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(slivers: [
-      _appBar(),
-      infoBar(
-          user: user,
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(user.bio),
-              Text(
-                user.website,
-                style: const TextStyle(color: primaryColor),
-              )
-            ],
-          )),
-      const SliverToBoxAdapter(
-        child: SizedBox(
-          height: 20,
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: button(
-              child: Text(
-                "Edit Profile",
-                style: subHeadingTextStyle.copyWith(
-                    color: Colors.black, fontWeight: FontWeight.w600),
+    return isLoading
+        ? Center(child: CircularProgressIndicator())
+        : CustomScrollView(slivers: [
+            _appBar(user.username),
+            infoBar(
+                user: user,
+                widget: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(user.bio),
+                    Text(
+                      user.website,
+                      style: const TextStyle(color: primaryColor),
+                    )
+                  ],
+                )),
+            const SliverToBoxAdapter(
+              child: SizedBox(
+                height: 20,
               ),
-              width: SizeConfig.screenWidth * 0.85,
-              onTap: () {
-                Get.to(EditProfilePage(user: user));
-              }),
-        ),
-      ),
-      const SliverToBoxAdapter(
-        child: SizedBox(
-          height: 26,
-        ),
-      ),
-      postGrid(),
-    ]);
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: button(
+                    child: Text(
+                      "Edit Profile",
+                      style: subHeadingTextStyle.copyWith(
+                          color: Colors.black, fontWeight: FontWeight.w600),
+                    ),
+                    width: SizeConfig.screenWidth * 0.85,
+                    onTap: () {
+                      Get.to(EditProfilePage(user: user));
+                    }),
+              ),
+            ),
+            const SliverToBoxAdapter(
+              child: SizedBox(
+                height: 26,
+              ),
+            ),
+            postGrid(),
+          ]);
   }
 
-  Widget _appBar() {
+  Widget _appBar(String username) {
     return SliverAppBar(
         pinned: true,
         backgroundColor: Colors.white,
         title: Text(
-          user.username,
+          username,
           style: const TextStyle(color: Colors.black),
         ),
         actions: [

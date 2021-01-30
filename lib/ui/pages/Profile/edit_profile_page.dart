@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/core/models/user_model.dart';
+import 'package:instagram/core/services/database.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/styles/colors.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
@@ -38,7 +39,16 @@ class EditProfilePage extends StatelessWidget {
         actions: [
           IconButton(
               icon: const Icon(Icons.done, color: primaryColor),
-              onPressed: () {
+              onPressed: () async {
+                print("user email" + user.email);
+                await Database().updateUserData(
+                    userModel: UserModel(
+                  email: user.email,
+                  username: _usernameTextController.text,
+                  name: _nameTextController.text,
+                  website: _websiteTextController.text,
+                  bio: _bioTextController.text,
+                ));
                 Get.back();
               })
         ],
@@ -53,7 +63,10 @@ class EditProfilePage extends StatelessWidget {
               Center(
                 child: CircleAvatar(
                   radius: 50,
-                  backgroundImage: AssetImage(user.userDp),
+                  backgroundImage: user.userDp == "" || user.userDp == null
+                      ? const NetworkImage(
+                          "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg")
+                      : AssetImage(user.userDp),
                 ),
               ),
               const SizedBox(

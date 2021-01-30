@@ -35,8 +35,10 @@ class ProfileWidget extends StatelessWidget {
           backgroundColor: Colors.white,
           child: CircleAvatar(
             radius: size < 30 ? size - 1 : size - 3,
-            backgroundImage: AssetImage(
-                story != null ? story.userDp : "assets/images/dp.jpg"),
+            backgroundImage: story != null
+                ? AssetImage(story.userDp)
+                : const NetworkImage(
+                    "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"),
           ),
         ),
       ),
