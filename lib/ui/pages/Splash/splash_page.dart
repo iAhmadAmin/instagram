@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:instagram/core/controllers/main_controller.dart';
+import 'package:instagram/core/controllers/user_controller.dart';
 import 'package:instagram/core/services/local_storage.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/pages/Auth/login_page.dart';
@@ -16,6 +17,7 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   final MainController _controller = Get.put(MainController());
+  final UserController _userController = Get.put(UserController());
 
   final Shader linearGradient =
       instaGrad.createShader(const Rect.fromLTWH(0, 0, 200, 40));
