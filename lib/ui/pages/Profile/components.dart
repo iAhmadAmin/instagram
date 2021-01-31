@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram/core/controllers/main_controller.dart';
 import 'package:instagram/core/models/data.dart';
 import 'package:instagram/core/models/user_model.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/styles/colors.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
 import 'package:instagram/ui/widgets/profile_widget.dart';
-import 'package:get/get.dart';
 
 List<String> photos = [
   "assets/images/1.jpg",
@@ -26,7 +24,10 @@ List<String> photos = [
   "assets/images/5.jpg",
 ];
 
-Widget infoBar({@required UserModel user, @required Widget widget}) {
+Widget infoBar(
+    {@required UserModel user,
+    @required Widget widget,
+    bool isUserProfile = true}) {
   return SliverToBoxAdapter(
       child: Container(
           padding: const EdgeInsets.only(left: 12, right: 26),
@@ -38,13 +39,18 @@ Widget infoBar({@required UserModel user, @required Widget widget}) {
                 children: [
                   Hero(
                     tag: user.username,
-                    child: ProfileWidget(
-                      onTap: () {},
-                      size: 48,
-                      story: stories.singleWhere(
-                          (story) => story.username == user.username,
-                          orElse: () => null),
-                    ),
+                    child: isUserProfile
+                        ? ProfileWidget(
+                            onTap: () {},
+                            size: 48,
+                            story: stories.singleWhere(
+                                (story) => story.username == user.username,
+                                orElse: () => null),
+                          )
+                        : CircleAvatar(
+                            radius: 46,
+                            backgroundImage: NetworkImage(user.userDp),
+                          ),
                   ),
                   _counter(count: user.post.toString(), label: "Posts"),
                   _counter(

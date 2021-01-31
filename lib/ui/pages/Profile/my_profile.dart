@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/core/controllers/main_controller.dart';
 import 'package:instagram/core/controllers/user_controller.dart';
@@ -21,32 +22,40 @@ class _MyProfilePageState extends State<MyProfilePage> {
 
   final UserController _userController = Get.find<UserController>();
 
-  bool isLoading = false;
-  UserModel user;
+  // bool isLoading = false;
+  // UserModel user;
 
-  _getUserData() async {
-    isLoading = true;
-    _userController.user =
-        await Database().getUserData(email: LocalStorage().getUserEmail());
-    user = _userController.user;
-    setState(() {
-      isLoading = false;
-    });
-  }
+  // _getUserData() async {
+  //   isLoading = true;
+  //   _userController.user =
+  //       await Database().getUserData(email: LocalStorage().getUserEmail());
+  //   user = _userController.user;
+  //   setState(() {
+  //     isLoading = false;
+  //   });
+  // }
 
-  @override
-  void initState() {
-    super.initState();
-    _getUserData();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _getUserData();
+  // } // Text(snapshot.data.get('website'));
 
   @override
   Widget build(BuildContext context) {
-    return isLoading
-        ? Center(child: CircularProgressIndicator())
-        : CustomScrollView(slivers: [
+    return StreamBuilder<DocumentSnapshot>(
+        stream: Database().userDataStream(email: LocalStorage().getUserEmail()),
+        builder: (context, snapshot) {
+          if (snapshot.hasError ||
+              snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          final UserModel user =
+              UserModel.fromDocumentSnapshot(doc: snapshot.data);
+          return CustomScrollView(slivers: [
             _appBar(user.username),
             infoBar(
+                isUserProfile: false,
                 user: user,
                 widget: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,6 +94,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
             ),
             postGrid(),
           ]);
+        });
   }
 
   Widget _appBar(String username) {

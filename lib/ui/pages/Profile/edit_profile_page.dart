@@ -1,4 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:instagram/core/controllers/edit_profile_controller.dart';
 import 'package:instagram/core/models/user_model.dart';
 import 'package:instagram/core/services/database.dart';
 import 'package:instagram/sizeconfig.dart';
@@ -6,122 +9,200 @@ import 'package:instagram/ui/styles/colors.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
 import 'package:get/get.dart';
 
-class EditProfilePage extends StatelessWidget {
+class EditProfilePage extends StatefulWidget {
   final UserModel user;
-  EditProfilePage({@required this.user});
+  const EditProfilePage({@required this.user});
+
+  @override
+  _EditProfilePageState createState() => _EditProfilePageState();
+}
+
+class _EditProfilePageState extends State<EditProfilePage> {
   TextEditingController _nameTextController = TextEditingController();
   TextEditingController _usernameTextController = TextEditingController();
   TextEditingController _bioTextController = TextEditingController();
   TextEditingController _websiteTextController = TextEditingController();
+  final picker = ImagePicker();
+  EditProfileController _controller = Get.put(EditProfileController());
+  bool isUpdating = false;
 
   @override
   Widget build(BuildContext context) {
-    _nameTextController.text = user.name;
-    _usernameTextController.text = user.username;
-    _bioTextController.text = user.bio;
-    _websiteTextController.text = user.website;
+    _nameTextController.text = widget.user.name;
+    _usernameTextController.text = widget.user.username;
+    _bioTextController.text = widget.user.bio;
+    _websiteTextController.text = widget.user.website;
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
-        title: const Text(
-          "Edit Profile",
-          style: TextStyle(color: Colors.black),
-        ),
-        leading: IconButton(
-            icon: const Icon(Icons.close),
-            onPressed: () {
-              Get.back();
-            }),
-        actions: [
-          IconButton(
-              icon: const Icon(Icons.done, color: primaryColor),
-              onPressed: () async {
-                print("user email" + user.email);
-                await Database().updateUserData(
-                    userModel: UserModel(
-                  email: user.email,
-                  username: _usernameTextController.text,
-                  name: _nameTextController.text,
-                  website: _websiteTextController.text,
-                  bio: _bioTextController.text,
-                ));
-                Get.back();
-              })
-        ],
-      ),
-      body: Container(
-        width: SizeConfig.screenWidth,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: CircleAvatar(
-                  radius: 50,
-                  backgroundImage: user.userDp == "" || user.userDp == null
-                      ? const NetworkImage(
-                          "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg")
-                      : AssetImage(user.userDp),
+    return isUpdating
+        ? const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          )
+        : Scaffold(
+            backgroundColor: Colors.white,
+            appBar: AppBar(
+              backgroundColor: Colors.white,
+              elevation: 0,
+              iconTheme: const IconThemeData(color: Colors.black),
+              title: const Text(
+                "Edit Profile",
+                style: TextStyle(color: Colors.black),
+              ),
+              leading: IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () {
+                    Get.back();
+                  }),
+              actions: [
+                IconButton(
+                    icon: const Icon(Icons.done, color: primaryColor),
+                    onPressed: () {
+                      _updateProfile();
+                    })
+              ],
+            ),
+            body: Container(
+              width: SizeConfig.screenWidth,
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: GetBuilder<EditProfileController>(
+                        builder: (value) {
+                          return CircleAvatar(
+                            radius: 50,
+                            backgroundImage: value.file == null
+                                ? NetworkImage(widget.user.userDp)
+                                : AssetImage(value.file.path),
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Center(
+                      child: GestureDetector(
+                          onTap: () {
+                            _showImagePicker(context);
+                          },
+                          child: const Text(
+                            "Change profile photo",
+                            style: TextStyle(color: primaryColor, fontSize: 20),
+                          )),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    _inputField(
+                      label: "Name",
+                      hint: widget.user.name,
+                      controller: _nameTextController,
+                    ),
+                    _inputField(
+                      label: "Username",
+                      hint: widget.user.username,
+                      controller: _usernameTextController,
+                    ),
+                    _inputField(
+                      label: "Website",
+                      hint: widget.user.website,
+                      controller: _websiteTextController,
+                    ),
+                    _inputField(
+                      label: "Bio",
+                      hint: widget.user.bio,
+                      controller: _bioTextController,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Switch to Professional account",
+                      style: TextStyle(color: primaryColor, fontSize: 18),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Personal information settings",
+                      style: TextStyle(color: primaryColor, fontSize: 18),
+                    )
+                  ],
                 ),
               ),
-              const SizedBox(
-                height: 12,
+            ),
+          );
+  }
+
+  _updateProfile() async {
+    setState(() {
+      isUpdating = true;
+    });
+    print("user email" + widget.user.email);
+    String newImage;
+    if (_controller.file != null) {
+      newImage = await Database().uploadFile();
+      print("New Image URL:  " + newImage);
+    }
+
+    await Database().updateUserData(
+        userModel: UserModel(
+      userDp: _controller.file != null ? newImage : widget.user.userDp,
+      email: widget.user.email,
+      username: _usernameTextController.text,
+      name: _nameTextController.text,
+      website: _websiteTextController.text,
+      bio: _bioTextController.text,
+    ));
+    _controller.updateImageFile(null);
+    setState(() {
+      isUpdating = false;
+    });
+    Get.back();
+  }
+
+  _showImagePicker(context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return SimpleDialog(
+            title: const Text("Change Profile Photo"),
+            children: [
+              SimpleDialogOption(
+                child: const Text("Photo with Camera"),
+                onPressed: _handleTakePhoto,
               ),
-              Center(
-                child: GestureDetector(
-                    onTap: () {},
-                    child: const Text(
-                      "Change profile photo",
-                      style: TextStyle(color: primaryColor, fontSize: 20),
-                    )),
+              SimpleDialogOption(
+                child: const Text("Image from Gallery"),
+                onPressed: _handleChooseImageFromGallery,
               ),
-              const SizedBox(
-                height: 16,
-              ),
-              _inputField(
-                label: "Name",
-                hint: user.name,
-                controller: _nameTextController,
-              ),
-              _inputField(
-                label: "Username",
-                hint: user.username,
-                controller: _usernameTextController,
-              ),
-              _inputField(
-                label: "Website",
-                hint: user.website,
-                controller: _websiteTextController,
-              ),
-              _inputField(
-                label: "Bio",
-                hint: user.bio,
-                controller: _bioTextController,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                "Switch to Professional account",
-                style: TextStyle(color: primaryColor, fontSize: 18),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                "Personal information settings",
-                style: TextStyle(color: primaryColor, fontSize: 18),
+              SimpleDialogOption(
+                child: const Text("Cancel"),
+                onPressed: () => Navigator.pop(context),
               )
             ],
-          ),
-        ),
-      ),
-    );
+          );
+        });
+  }
+
+  _handleTakePhoto() async {
+    Get.back();
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    if (pickedFile.path != null) {
+      _controller.updateImageFile(File(pickedFile.path));
+    }
+  }
+
+  _handleChooseImageFromGallery() async {
+    Get.back();
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    if (pickedFile.path != null) {
+      _controller.updateImageFile(File(pickedFile.path));
+    }
   }
 
   _inputField(

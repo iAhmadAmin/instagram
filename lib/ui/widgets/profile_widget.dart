@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/core/models/story.dart';
 import 'package:instagram/ui/styles/colors.dart';
@@ -37,7 +38,7 @@ class ProfileWidget extends StatelessWidget {
             radius: size < 30 ? size - 1 : size - 3,
             backgroundImage: story != null
                 ? AssetImage(story.userDp)
-                : const NetworkImage(
+                : const CachedNetworkImageProvider(
                     "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"),
           ),
         ),
