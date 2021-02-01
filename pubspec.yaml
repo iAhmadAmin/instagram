@@ -23,6 +23,7 @@ dependencies:
   image_picker: ^0.6.7+22
   path_provider: ^1.6.27
   uuid: ^2.2.2
+  photo_manager: ^0.6.0
 
 dev_dependencies:
   flutter_test:
