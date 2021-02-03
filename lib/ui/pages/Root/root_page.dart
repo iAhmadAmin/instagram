@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:instagram/core/controllers/add_post_controller.dart';
 import 'package:instagram/core/controllers/main_controller.dart';
 import 'package:instagram/core/controllers/user_controller.dart';
 import 'package:instagram/core/services/auth_service.dart';
@@ -21,6 +22,7 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   final MainController _controller = Get.find<MainController>();
   final UserController _userController = Get.find<UserController>();
+  final AddPostController _cont = Get.put(AddPostController());
 
   int _selectedTab = 0;
 
