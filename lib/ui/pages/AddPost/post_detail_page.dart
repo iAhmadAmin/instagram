@@ -1,19 +1,17 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:instagram/core/controllers/user_controller.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/styles/colors.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
 
 class PostDetail extends StatelessWidget {
-  final String postImgPath;
-  const PostDetail({this.postImgPath});
+  final File imgFile;
+  const PostDetail({this.imgFile});
 
   @override
   Widget build(BuildContext context) {
-    print("Post Image Path:  " + postImgPath);
+    print("Post Image Path:  " + imgFile.path.toString());
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -75,7 +73,7 @@ class PostDetail extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          Image.file(File(postImgPath)),
+          //Image.file(File(postImgPath)),
         ],
       ),
     );

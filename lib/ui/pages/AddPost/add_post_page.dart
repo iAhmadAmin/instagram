@@ -42,8 +42,8 @@ class _AddPostPageState extends State<AddPostPage> {
             icon: const Icon(Icons.arrow_forward, color: primaryColor),
             onPressed: () {
               Get.to(PostDetail(
-                postImgPath: _controller
-                    .mediaList[_controller.selectedImageIndex].relativePath,
+                imgFile:
+                    _controller.mediaList[_controller.selectedImageIndex].file,
               ));
             },
           ),
