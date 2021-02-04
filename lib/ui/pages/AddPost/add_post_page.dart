@@ -51,7 +51,7 @@ class AddPostPage extends StatelessWidget {
                 color: Colors.black.withOpacity(0.7),
                 borderRadius: BorderRadius.circular(40)),
             height: 45,
-            width: 180,
+            width: getProportionateScreenWidth(180),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

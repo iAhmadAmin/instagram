@@ -26,11 +26,15 @@ class AddPostController extends GetxController {
   _fetchNewMedia() async {
     final result = await PhotoManager.requestPermission();
     if (result) {
-      // success//load the album list
       final List<AssetPathEntity> albums =
           await PhotoManager.getAssetPathList(onlyAll: true);
-      final List<AssetEntity> media = await albums[0].getAssetListPaged(0, 50);
-      mediaList.assignAll(media);
+      if (albums.isNotEmpty) {
+        final List<AssetEntity> media =
+            await albums[0].getAssetListPaged(0, 50);
+        mediaList.assignAll(media);
+      } else {
+        print("nothing found in gallery");
+      }
     } else {
       // fail
       /// if result is fail, you can call `PhotoManager.openSetting();`  to open android/ios applicaton's setting to get permission
