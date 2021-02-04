@@ -139,30 +139,36 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
   _updateProfile() async {
-    setState(() {
-      isUpdating = true;
-    });
-    print("user email" + widget.user.email);
-    String newImage;
-    if (_controller.file != null) {
-      newImage = await Database().uploadFile();
-      print("New Image URL:  " + newImage);
-    }
+    if (_nameTextController.text == widget.user.name &&
+        _usernameTextController.text == widget.user.username &&
+        _bioTextController.text == widget.user.bio &&
+        _websiteTextController.text == widget.user.website &&
+        _controller.file == null) {
+      Get.back();
+    } else {
+      setState(() {
+        isUpdating = true;
+      });
+      String newImage;
+      if (_controller.file != null) {
+        newImage = await Database().uploadFile();
+      }
 
-    await Database().updateUserData(
-        userModel: UserModel(
-      userDp: _controller.file != null ? newImage : widget.user.userDp,
-      email: widget.user.email,
-      username: _usernameTextController.text,
-      name: _nameTextController.text,
-      website: _websiteTextController.text,
-      bio: _bioTextController.text,
-    ));
-    _controller.updateImageFile(null);
-    setState(() {
-      isUpdating = false;
-    });
-    Get.back();
+      await Database().updateUserData(
+          userModel: UserModel(
+        userDp: _controller.file != null ? newImage : widget.user.userDp,
+        email: widget.user.email,
+        username: _usernameTextController.text,
+        name: _nameTextController.text,
+        website: _websiteTextController.text,
+        bio: _bioTextController.text,
+      ));
+      _controller.updateImageFile(null);
+      setState(() {
+        isUpdating = false;
+      });
+      Get.back();
+    }
   }
 
   _showImagePicker(context) {
@@ -222,7 +228,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
             style: captionTextStyle,
           ),
           TextFormField(
-            maxLines: label == "Bio" ? 2 : 1,
+            minLines: 1,
+            maxLines: label == "Bio" ? 4 : 1,
             controller: controller,
             // initialValue: hint,
             // obscureText: isPassField != null ? true : false,

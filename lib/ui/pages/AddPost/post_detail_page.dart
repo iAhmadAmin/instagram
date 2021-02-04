@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:instagram/core/controllers/user_controller.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/styles/colors.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
@@ -51,7 +52,9 @@ class PostDetail extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 22,
-            //backgroundImage: AssetImage(Get.find<UserController>().user.userDp),
+            backgroundImage: NetworkImage(
+              Get.find<UserController>().user.userDp,
+            ),
           ),
           const SizedBox(width: 12),
           SizedBox(
@@ -73,7 +76,14 @@ class PostDetail extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          //Image.file(File(postImgPath)),
+          SizedBox(
+            height: 60,
+            width: 60,
+            child: Image.file(
+              File(imgFile.path),
+              fit: BoxFit.cover,
+            ),
+          ),
         ],
       ),
     );

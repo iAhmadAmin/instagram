@@ -4,6 +4,8 @@ import 'package:instagram/core/controllers/add_post_controller.dart';
 import 'package:instagram/core/controllers/main_controller.dart';
 import 'package:instagram/core/controllers/user_controller.dart';
 import 'package:instagram/core/services/auth_service.dart';
+import 'package:instagram/core/services/database.dart';
+import 'package:instagram/core/services/local_storage.dart';
 import 'package:instagram/my_icons.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/pages/Activity/activity_page.dart';
@@ -24,8 +26,6 @@ class _RootPageState extends State<RootPage> {
   final UserController _userController = Get.find<UserController>();
   final AddPostController _cont = Get.put(AddPostController());
 
-  int _selectedTab = 0;
-
   final List<Widget> _pages = [
     HomePage(),
     SearchPage(),
@@ -33,6 +33,17 @@ class _RootPageState extends State<RootPage> {
     ActivityPage(),
     MyProfilePage(),
   ];
+
+  @override
+  void initState() {
+    getUserData();
+    super.initState();
+  }
+
+  Future<void> getUserData() async {
+    Get.find<UserController>().user =
+        await Database().getUserData(email: LocalStorage().getUserEmail());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +60,7 @@ class _RootPageState extends State<RootPage> {
                 child: Column(
                   children: [
                     Expanded(
-                      child: _pages[_selectedTab],
+                      child: _pages[_controller.currentRootTab],
                     ),
                     _bottomNavBar(),
                   ],
@@ -82,11 +93,15 @@ class _RootPageState extends State<RootPage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           _buildItem(
-            icon: _selectedTab == 0 ? MyIcons.home_active : MyIcons.home,
+            icon: _controller.currentRootTab == 0
+                ? MyIcons.home_active
+                : MyIcons.home,
             index: 0,
           ),
           _buildItem(
-            icon: _selectedTab == 1 ? MyIcons.search_active : MyIcons.search,
+            icon: _controller.currentRootTab == 1
+                ? MyIcons.search_active
+                : MyIcons.search,
             index: 1,
           ),
           _buildItem(
@@ -94,7 +109,9 @@ class _RootPageState extends State<RootPage> {
             index: 2,
           ),
           _buildItem(
-            icon: _selectedTab == 3 ? MyIcons.heart_active : MyIcons.heart,
+            icon: _controller.currentRootTab == 3
+                ? MyIcons.heart_active
+                : MyIcons.heart,
             index: 3,
           ),
           _profileButton(),
@@ -116,9 +133,7 @@ class _RootPageState extends State<RootPage> {
                     Get.to(AddPostPage());
                   }
                 : () {
-                    setState(() {
-                      _selectedTab = index;
-                    });
+                    _controller.updateCurrentRootTab(index);
                   },
         icon: Icon(icon, color: Colors.black),
       );
@@ -128,13 +143,12 @@ class _RootPageState extends State<RootPage> {
   Widget _profileButton() {
     return GestureDetector(
       onTap: () {
-        setState(() {
-          _selectedTab = 4;
-        });
+        _controller.updateCurrentRootTab(4);
       },
       child: CircleAvatar(
         radius: 16,
-        backgroundColor: _selectedTab == 4 ? Colors.black : Colors.white,
+        backgroundColor:
+            _controller.currentRootTab == 4 ? Colors.black : Colors.white,
         child: const CircleAvatar(
           radius: 14,
           backgroundImage: AssetImage("assets/images/dp.jpg"),

@@ -4,6 +4,12 @@ class MainController extends GetxController {
   bool isMenuOpened = false;
   bool isCommentTFOpend = false;
   bool isLoading = false;
+  int currentRootTab = 0;
+
+  void updateCurrentRootTab(int index) {
+    currentRootTab = index;
+    update();
+  }
 
   void controlMenu() {
     isMenuOpened = !isMenuOpened;

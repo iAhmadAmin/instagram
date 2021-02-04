@@ -37,8 +37,8 @@ class AuthService {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       LocalStorage().writeUserEmail(email);
-      print(_userController.user.email);
       LocalStorage().saveIsLogedIn(true);
+
       Get.offAll(RootPage());
     } on FirebaseAuthException catch (e) {
       Get.snackbar("Error Logging!", e.message,
