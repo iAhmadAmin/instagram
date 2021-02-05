@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:instagram/core/controllers/edit_profile_controller.dart';
 import 'package:instagram/core/controllers/main_controller.dart';
+import 'package:instagram/core/controllers/user_controller.dart';
 import 'package:instagram/core/models/post.dart';
 import 'package:instagram/core/models/user_model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -33,7 +34,8 @@ class Database {
             "following": 0,
             "website": "",
             "bio": "",
-            "userdp": "",
+            "userdp":
+                "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg",
           })
           .then((value) => print("User Added"))
           .catchError((error) => print(" Failed to add user: $error"));
@@ -78,22 +80,25 @@ class Database {
     }
   }
 
-  Future<String> uploadFile({@required File file}) async {
+  Future<String> uploadFile({@required File file, @required String id}) async {
     try {
-      file = await _compressImage(file: file);
-      await storageRef.putFile(file);
-      final String downloadUrl = await storageRef.getDownloadURL();
+      file = await _compressImage(file: file, id: id);
+      await storageRef
+          .child(Get.find<UserController>().user.username)
+          .child(id)
+          .putFile(file);
+      final String downloadUrl = await storageRef.child(id).getDownloadURL();
       return downloadUrl;
     } catch (e) {
       print(e);
     }
   }
 
-  _compressImage({@required File file}) async {
+  _compressImage({@required File file, @required String id}) async {
     final tempDir = await getTemporaryDirectory();
     final path = tempDir.path;
     final Img.Image imageFile = Img.decodeImage(file.readAsBytesSync());
-    final compressedImageFile = File('$path.jpg')
+    final compressedImageFile = File('$path/img_$id.jpg')
       ..writeAsBytesSync(Img.encodeJpg(imageFile, quality: 85));
     return compressedImageFile;
   }
@@ -104,7 +109,7 @@ class Database {
     try {
       _mainController.changeLoading();
       final postId = Uuid().v4();
-      final String imgUrl = await uploadFile(file: post.imgFile);
+      final String imgUrl = await uploadFile(file: post.imgFile, id: postId);
       await _firestore.collection("posts").doc(postId).set({
         'caption': post.caption,
         'location': post.location,

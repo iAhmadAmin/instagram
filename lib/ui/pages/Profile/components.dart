@@ -6,6 +6,7 @@ import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/styles/colors.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
 import 'package:instagram/ui/widgets/profile_widget.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 List<String> photos = [
   "assets/images/1.jpg",
@@ -49,7 +50,9 @@ Widget infoBar(
                           )
                         : CircleAvatar(
                             radius: 46,
-                            backgroundImage: NetworkImage(user.userDp),
+                            backgroundImage: CachedNetworkImageProvider(user
+                                    .userDp ??
+                                "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"),
                           ),
                   ),
                   _counter(count: user.post.toString(), label: "Posts"),

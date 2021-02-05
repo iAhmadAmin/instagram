@@ -1,6 +1,5 @@
 import 'package:instagram/core/models/activity.dart';
 import 'package:instagram/core/models/message.dart';
-import 'package:instagram/core/models/post.dart';
 import 'package:instagram/core/models/story.dart';
 import 'package:instagram/core/models/user_model.dart';
 
