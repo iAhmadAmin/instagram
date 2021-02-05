@@ -1,24 +1,21 @@
+import 'dart:io';
+
 class Post {
   final String username;
-  final String userDp;
-  final String postAsset;
+  final String userDpUrl;
+  final File imgFile;
   final String location;
-  bool isLiked;
-  int likes;
-  List<String> comments;
-  final String postDesc;
+  final String caption;
+  List<String> likes;
+  Map<String, String> comments;
 
-  Post(
-      {this.username,
-      this.isLiked = false,
-      this.location,
-      this.userDp,
-      this.postAsset,
-      this.likes,
-      this.comments,
-      this.postDesc});
-
-  void likePost() {
-    this.isLiked = !isLiked;
-  }
+  Post({
+    this.username,
+    this.imgFile,
+    this.location,
+    this.userDpUrl,
+    this.likes,
+    this.comments,
+    this.caption,
+  });
 }

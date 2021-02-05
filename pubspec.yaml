@@ -22,9 +22,9 @@ dependencies:
   google_fonts: ^1.1.1
   image_picker: ^0.6.7+22
   path_provider: ^1.6.27
-  uuid: ^2.2.2
   photo_manager: ^0.6.0
   camera: ^0.7.0+2
+  uuid: ^2.2.2
 
 dev_dependencies:
   flutter_test:

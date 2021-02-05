@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/core/models/data.dart';
-import 'package:instagram/core/models/post.dart';
 import 'package:instagram/core/models/story.dart';
 import 'package:instagram/sizeconfig.dart';
-import 'package:instagram/ui/pages/Home/components/post_tile.dart';
 import 'package:instagram/ui/pages/Home/components/story.dart';
 import 'package:instagram/ui/pages/Messenger/messenger_page.dart';
-import 'package:instagram/ui/widgets/suggestion_bar.dart';
 import '../../../my_icons.dart';
 import 'package:get/get.dart';
 
@@ -17,7 +14,7 @@ class HomePage extends StatelessWidget {
       slivers: [
         _appBar(),
         _storyBar(),
-        _postBar(),
+        // _postBar(),
       ],
     );
   }
@@ -76,16 +73,15 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _postBar() {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          final Post post = posts[index];
-
-          return PostTile(post: post);
-        },
-        childCount: posts.length,
-      ),
-    );
-  }
+  // Widget _postBar() {
+  //   return SliverList(
+  //     delegate: SliverChildBuilderDelegate(
+  //       (context, index) {
+  //         final Post post = posts[index];
+  //         return PostTile(post: post);
+  //       },
+  //       childCount: posts.length,
+  //     ),
+  //   );
+  // }
 }

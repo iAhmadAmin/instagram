@@ -22,8 +22,6 @@ class MainController extends GetxController {
   }
 
   void changeLoading() {
-    print(
-        "...........................change loading callled........................");
     isLoading = !isLoading;
     update();
   }

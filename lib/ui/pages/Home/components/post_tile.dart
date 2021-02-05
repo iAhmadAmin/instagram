@@ -92,14 +92,14 @@ class _PostTileState extends State<PostTile> {
       onDoubleTap: () {
         setState(() {
           flareControls.play("like");
-          widget.post.isLiked ? null : widget.post.likePost();
+          // widget.post.isLiked ? null : widget.post.likePost();
         });
       },
       child: Container(
           child: Stack(
         alignment: Alignment.center,
         children: [
-          Image.asset(widget.post.postAsset),
+          Image.asset(widget.post.userDpUrl),
           SizedBox(
             height: 160.0,
             width: 160.0,
@@ -121,14 +121,7 @@ class _PostTileState extends State<PostTile> {
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         children: [
-          _actionButton(
-              icon: widget.post.isLiked ? MyIcons.heart_active : MyIcons.heart,
-              clr: widget.post.isLiked ? Colors.red : Colors.black,
-              onTap: () {
-                setState(() {
-                  widget.post.likePost();
-                });
-              }),
+          _actionButton(icon: MyIcons.heart, onTap: () {}),
           _actionButton(icon: MyIcons.comment, onTap: () {}),
           _actionButton(icon: MyIcons.send, onTap: () {}),
           const Spacer(),
@@ -165,8 +158,8 @@ class _PostTileState extends State<PostTile> {
           ),
           Container(
             padding: EdgeInsets.symmetric(
-                vertical: widget.post.postDesc != null ? 3 : 0),
-            child: widget.post.postDesc != null
+                vertical: widget.post.caption != null ? 3 : 0),
+            child: widget.post.caption != null
                 ? RichText(
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -175,7 +168,7 @@ class _PostTileState extends State<PostTile> {
                       style: impBodyTextStyle,
                       children: <TextSpan>[
                         TextSpan(
-                            text: widget.post.postDesc, style: bodyTextStyle),
+                            text: widget.post.caption, style: bodyTextStyle),
                       ],
                     ),
                   )

@@ -41,60 +41,6 @@ List<Story> stories = [
   ),
 ];
 
-List<Post> posts = [
-  Post(
-    username: "user_1232",
-    userDp: "assets/images/1.jpg",
-    postAsset: "assets/images/1.jpg",
-    postDesc: "it is me enjoying my times in holidays.",
-    likes: 322,
-    location: "City name, country",
-    comments: [
-      "awesome",
-      "wow enjoying",
-      "nice photo",
-    ],
-  ),
-  Post(
-    username: "new_user",
-    userDp: "assets/images/2.jpg",
-    postAsset: "assets/images/2.jpg",
-    postDesc:
-        "it is me enjoying my times in holidays. It was a really enjoyble day with my friends. BTW its just a demo description. LOL",
-    likes: 322,
-    comments: [
-      "awesome",
-      "wow enjoying",
-      "nice photo",
-    ],
-  ),
-  Post(
-    username: "odl_user123",
-    userDp: "assets/images/3.jpg",
-    postAsset: "assets/images/3.jpg",
-    postDesc: "it is me enjoying my times in holidays.",
-    location: "City name, country",
-    likes: 322,
-    comments: [
-      "awesome",
-      "wow enjoying",
-      "nice photo",
-    ],
-  ),
-  Post(
-    username: "random_user",
-    userDp: "assets/images/4.jpg",
-    postAsset: "assets/images/4.jpg",
-    postDesc: "it is me enjoying my times in holidays.",
-    likes: 322,
-    comments: [
-      "awesome",
-      "wow enjoying",
-      "nice photo",
-    ],
-  ),
-];
-
 List<UserModel> users = [
   UserModel(
     username: "user_1232",

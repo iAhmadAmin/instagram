@@ -19,7 +19,6 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   TextEditingController _nameTextController = TextEditingController();
-  TextEditingController _usernameTextController = TextEditingController();
   TextEditingController _bioTextController = TextEditingController();
   TextEditingController _websiteTextController = TextEditingController();
   final picker = ImagePicker();
@@ -29,7 +28,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     _nameTextController.text = widget.user.name;
-    _usernameTextController.text = widget.user.username;
     _bioTextController.text = widget.user.bio;
     _websiteTextController.text = widget.user.website;
 
@@ -103,11 +101,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       controller: _nameTextController,
                     ),
                     _inputField(
-                      label: "Username",
-                      hint: widget.user.username,
-                      controller: _usernameTextController,
-                    ),
-                    _inputField(
                       label: "Website",
                       hint: widget.user.website,
                       controller: _websiteTextController,
@@ -140,7 +133,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   _updateProfile() async {
     if (_nameTextController.text == widget.user.name &&
-        _usernameTextController.text == widget.user.username &&
         _bioTextController.text == widget.user.bio &&
         _websiteTextController.text == widget.user.website &&
         _controller.file == null) {
@@ -151,14 +143,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
       });
       String newImage;
       if (_controller.file != null) {
-        newImage = await Database().uploadFile();
+        newImage = await Database().uploadFile(file: _controller.file);
       }
 
       await Database().updateUserData(
           userModel: UserModel(
         userDp: _controller.file != null ? newImage : widget.user.userDp,
         email: widget.user.email,
-        username: _usernameTextController.text,
         name: _nameTextController.text,
         website: _websiteTextController.text,
         bio: _bioTextController.text,
