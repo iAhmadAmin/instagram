@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:image/image.dart' as Img;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,6 +18,9 @@ class Database {
   Reference storageRef = FirebaseStorage.instance.ref('images');
   EditProfileController _controller = Get.put(EditProfileController());
   MainController _mainController = Get.find<MainController>();
+
+  Stream postStream =
+      FirebaseFirestore.instance.collection('posts').snapshots();
 
   Future<void> createNewUser({@required UserModel user}) async {
     try {
@@ -105,17 +109,19 @@ class Database {
       _mainController.changeLoading();
       final postId = Uuid().v4();
       final String imgUrl = await uploadFile(file: post.imgFile);
-      await _firestore.collection("posts").doc(postId).set({
-        'caption': post.caption,
-        'location': post.location,
-        'imgUrl': imgUrl,
-        'comments': post.comments,
-        'likes': post.likes,
-        'username': post.username,
-        'userDpUrl': post.userDpUrl,
+      Timer(const Duration(seconds: 1), () async {
+        await _firestore.collection("posts").doc(postId).set({
+          'caption': post.caption,
+          'location': post.location,
+          'imgUrl': imgUrl,
+          'comments': post.comments,
+          'likes': post.likes,
+          'username': post.username,
+          'userDpUrl': post.userDpUrl,
+        });
+        _mainController.changeLoading();
+        Get.offAll(RootPage());
       });
-      _mainController.changeLoading();
-      Get.offAll(RootPage());
     } catch (e) {
       print(e);
     }

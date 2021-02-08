@@ -5,6 +5,7 @@ import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/pages/AddPost/gallery_page.dart';
 
 class AddPostPage extends StatelessWidget {
+  AddPostController _addPostController = Get.put(AddPostController());
   List<String> _category = [
     "POST",
     "STORY",

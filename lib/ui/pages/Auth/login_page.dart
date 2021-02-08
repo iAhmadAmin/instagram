@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/core/controllers/main_controller.dart';
 import 'package:instagram/core/services/auth_service.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/pages/Auth/signup_page.dart';
@@ -48,13 +49,16 @@ class LoginPage extends StatelessWidget {
               const SizedBox(
                 height: 16,
               ),
-              AuthButton(
-                btnClr: primaryColor,
-                label: "Log In",
-                onTap: () {
-                  _validate();
-                },
-              ),
+              GetBuilder<MainController>(builder: (value) {
+                return AuthButton(
+                  isLoading: value.isLoading,
+                  btnClr: primaryColor,
+                  label: "Log In",
+                  onTap: () {
+                    _validate();
+                  },
+                );
+              }),
               _divider(),
               AuthButton(
                 btnClr: primaryColor,

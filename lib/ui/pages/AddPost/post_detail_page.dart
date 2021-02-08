@@ -41,7 +41,10 @@ class PostDetail extends StatelessWidget {
         actions: [
           GetBuilder<MainController>(builder: (value) {
             return value.isLoading
-                ? const CircularProgressIndicator()
+                ? const SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: Center(child: const CircularProgressIndicator()))
                 : IconButton(
                     icon: const Icon(Icons.done, color: primaryColor),
                     onPressed: () {

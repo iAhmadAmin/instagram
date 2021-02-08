@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:photo_manager/photo_manager.dart';
-import 'dart:io';
 
 class AddPostController extends GetxController {
   var mediaList = [].obs;

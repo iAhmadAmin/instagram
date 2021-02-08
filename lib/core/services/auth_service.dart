@@ -27,6 +27,8 @@ class AuthService {
       Get.offAll(LoginPage());
       Get.snackbar("SignUp Successfully!", "Now, you can log in to instagram.");
     } on FirebaseAuthException catch (e) {
+      _controller.changeLoading();
+
       Get.snackbar("Error Registering!", e.message,
           snackPosition: SnackPosition.BOTTOM);
     }
@@ -35,12 +37,14 @@ class AuthService {
   Future<void> signin(
       {@required String email, @required String password}) async {
     try {
+      _controller.changeLoading();
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       LocalStorage().writeUserEmail(email);
       LocalStorage().saveIsLogedIn(true);
-
+      _controller.changeLoading();
       Get.offAll(RootPage());
     } on FirebaseAuthException catch (e) {
+      _controller.changeLoading();
       Get.snackbar("Error Logging!", e.message,
           snackPosition: SnackPosition.BOTTOM);
     }
