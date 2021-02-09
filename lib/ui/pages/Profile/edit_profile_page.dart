@@ -2,12 +2,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagram/core/controllers/edit_profile_controller.dart';
+import 'package:instagram/core/controllers/user_controller.dart';
 import 'package:instagram/core/models/user_model.dart';
 import 'package:instagram/core/services/database.dart';
 import 'package:instagram/sizeconfig.dart';
 import 'package:instagram/ui/styles/colors.dart';
 import 'package:instagram/ui/styles/textstyles.dart';
 import 'package:get/get.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class EditProfilePage extends StatefulWidget {
   final UserModel user;
@@ -73,7 +75,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           return CircleAvatar(
                             radius: 50,
                             backgroundImage: value.file == null
-                                ? NetworkImage(widget.user.userDp)
+                                ? CachedNetworkImageProvider(widget
+                                        .user.userDp ??
+                                    "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg")
                                 : AssetImage(value.file.path),
                           );
                         },
@@ -143,7 +147,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
       });
       String newImage;
       if (_controller.file != null) {
-        newImage = await Database().uploadFile(file: _controller.file);
+        newImage = await Database().uploadFile(
+            file: _controller.file,
+            id: Get.find<UserController>().user.username);
+        print("new image: " + newImage.toString());
       }
 
       await Database().updateUserData(
