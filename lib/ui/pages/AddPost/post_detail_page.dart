@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:instagram/core/controllers/add_post_controller.dart';
 import 'package:instagram/core/controllers/main_controller.dart';
 import 'package:instagram/core/controllers/user_controller.dart';
 import 'package:instagram/core/models/post.dart';
@@ -19,7 +18,6 @@ class PostDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("Post Image Path:  " + imgFile.path.toString());
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -138,7 +136,8 @@ class PostDetail extends StatelessWidget {
           CircleAvatar(
             radius: 22,
             backgroundImage: NetworkImage(
-              Get.find<UserController>().user.userDp,
+              Get.find<UserController>().user.userDp ??
+                  "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg",
             ),
           ),
           const SizedBox(width: 12),

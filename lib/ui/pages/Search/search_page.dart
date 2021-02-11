@@ -46,20 +46,20 @@ class SearchPage extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          Expanded(
-            child: StaggeredGridView.countBuilder(
-              crossAxisCount: 4,
-              itemCount: photos.length,
-              itemBuilder: (BuildContext context, int index) => Image.asset(
-                photos[index],
-                fit: BoxFit.cover,
-              ),
-              staggeredTileBuilder: (int index) =>
-                  StaggeredTile.count(2, index.isEven ? 2 : 1),
-              mainAxisSpacing: 4.0,
-              crossAxisSpacing: 4.0,
-            ),
-          )
+          // Expanded(
+          //   child: StaggeredGridView.countBuilder(
+          //     crossAxisCount: 4,
+          //     itemCount: photos.length,
+          //     itemBuilder: (BuildContext context, int index) => Image.asset(
+          //       photos[index],
+          //       fit: BoxFit.cover,
+          //     ),
+          //     staggeredTileBuilder: (int index) =>
+          //         StaggeredTile.count(2, index.isEven ? 2 : 1),
+          //     mainAxisSpacing: 4.0,
+          //     crossAxisSpacing: 4.0,
+          //   ),
+          // )
         ],
       ),
     );

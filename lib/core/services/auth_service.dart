@@ -28,10 +28,6 @@ class AuthService {
       Get.snackbar("SignUp Successfully!", "Now, you can log in to instagram.");
     } on FirebaseAuthException catch (e) {
       _controller.changeLoading();
-<<<<<<< HEAD
-
-=======
->>>>>>> 250a722424200b93b04df4c5d86387a19a274d77
       Get.snackbar("Error Registering!", e.message,
           snackPosition: SnackPosition.BOTTOM);
     }

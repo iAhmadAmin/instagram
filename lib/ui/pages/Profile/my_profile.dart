@@ -19,27 +19,18 @@ class MyProfilePage extends StatefulWidget {
 
 class _MyProfilePageState extends State<MyProfilePage> {
   final MainController _controller = Get.find<MainController>();
-
   final UserController _userController = Get.find<UserController>();
+  var urls;
 
-  // bool isLoading = false;
-  // UserModel user;
+  @override
+  void initState() {
+    _getUrls();
+    super.initState();
+  }
 
-  // _getUserData() async {
-  //   isLoading = true;
-  //   _userController.user =
-  //       await Database().getUserData(email: LocalStorage().getUserEmail());
-  //   user = _userController.user;
-  //   setState(() {
-  //     isLoading = false;
-  //   });
-  // }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _getUserData();
-  // } // Text(snapshot.data.get('website'));
+  _getUrls() async {
+    urls = await Database().userPhotoUrls(_userController.user.username);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +83,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
                 height: 26,
               ),
             ),
-            postGrid(),
+            urls != null
+                ? postGrid(urls: urls)
+                : const SliverToBoxAdapter(child: const SizedBox()),
           ]);
         });
   }

@@ -147,9 +147,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
       });
       String newImage;
       if (_controller.file != null) {
-        newImage = await Database().uploadFile(
-            file: _controller.file,
-            id: Get.find<UserController>().user.username);
+        newImage = await Database()
+            .uploadFile(file: _controller.file, id: widget.user.username);
         print("new image: " + newImage.toString());
       }
 

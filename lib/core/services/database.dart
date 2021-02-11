@@ -91,7 +91,10 @@ class Database {
           .child(Get.find<UserController>().user.username)
           .child(id)
           .putFile(file);
-      final String downloadUrl = await storageRef.child(id).getDownloadURL();
+      final String downloadUrl = await storageRef
+          .child(Get.find<UserController>().user.username)
+          .child(id)
+          .getDownloadURL();
       return downloadUrl;
     } catch (e) {
       print(e);
@@ -108,26 +111,11 @@ class Database {
   }
 
   Future<void> createPost({
-    @required Post post,
+    @required final Post post,
   }) async {
     try {
       _mainController.changeLoading();
       final postId = Uuid().v4();
-<<<<<<< HEAD
-      final String imgUrl = await uploadFile(file: post.imgFile);
-      Timer(const Duration(seconds: 1), () async {
-        await _firestore.collection("posts").doc(postId).set({
-          'caption': post.caption,
-          'location': post.location,
-          'imgUrl': imgUrl,
-          'comments': post.comments,
-          'likes': post.likes,
-          'username': post.username,
-          'userDpUrl': post.userDpUrl,
-        });
-        _mainController.changeLoading();
-        Get.offAll(RootPage());
-=======
       final String imgUrl = await uploadFile(file: post.imgFile, id: postId);
       await _firestore.collection("posts").doc(postId).set({
         'caption': post.caption,
@@ -137,10 +125,31 @@ class Database {
         'likes': post.likes,
         'username': post.username,
         'userDpUrl': post.userDpUrl,
->>>>>>> 250a722424200b93b04df4c5d86387a19a274d77
       });
+      await _firestore
+          .collection('users')
+          .doc(Get.find<UserController>().user.email)
+          .collection('posts')
+          .doc(postId)
+          .set({
+        'postId': postId,
+        'imgUrl': imgUrl,
+      });
+      _mainController.changeLoading();
+      Get.offAll(RootPage());
     } catch (e) {
       print(e);
     }
+    ;
+  }
+
+  Future<List<String>> userPhotoUrls(@required String username) async {
+    var result = await storageRef.child(username).listAll();
+    List<String> urls = [];
+    result.items.forEach((i) async {
+      String url = await i.getDownloadURL();
+      urls.add(url);
+    });
+    return urls;
   }
 }

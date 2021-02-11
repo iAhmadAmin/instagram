@@ -8,23 +8,6 @@ import 'package:instagram/ui/styles/textstyles.dart';
 import 'package:instagram/ui/widgets/profile_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-List<String> photos = [
-  "assets/images/1.jpg",
-  "assets/images/2.jpg",
-  "assets/images/3.jpg",
-  "assets/images/4.jpg",
-  "assets/images/5.jpg",
-  "assets/images/6.jpg",
-  "assets/images/7.jpg",
-  "assets/images/8.jpg",
-  "assets/images/9.jpg",
-  "assets/images/1.jpg",
-  "assets/images/2.jpg",
-  "assets/images/3.jpg",
-  "assets/images/4.jpg",
-  "assets/images/5.jpg",
-];
-
 Widget infoBar(
     {@required UserModel user,
     @required Widget widget,
@@ -122,7 +105,10 @@ Widget button(
       ));
 }
 
-Widget postGrid() {
+Widget postGrid({@required List<String> urls}) {
+  urls.forEach((element) {
+    print(element);
+  });
   return SliverGrid(
     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
       maxCrossAxisExtent: SizeConfig.screenWidth / 3,
@@ -131,12 +117,14 @@ Widget postGrid() {
     ),
     delegate: SliverChildBuilderDelegate(
       (BuildContext context, int index) {
-        return Image.asset(
-          photos[index],
-          fit: BoxFit.cover,
+        return Container(
+          child: CachedNetworkImage(
+            imageUrl: urls[index],
+            fit: BoxFit.cover,
+          ),
         );
       },
-      childCount: photos.length,
+      childCount: urls.length,
     ),
   );
 }
