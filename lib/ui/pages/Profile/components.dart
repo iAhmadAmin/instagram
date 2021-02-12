@@ -38,11 +38,13 @@ Widget infoBar(
                                 "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"),
                           ),
                   ),
-                  _counter(count: user.post.toString(), label: "Posts"),
+                  _counter(count: user.posts.length.toString(), label: "Posts"),
                   _counter(
-                      count: user.followers.toString(), label: "Followers"),
+                      count: user.followers.length.toString(),
+                      label: "Followers"),
                   _counter(
-                      count: user.following.toString(), label: "Following"),
+                      count: user.following.length.toString(),
+                      label: "Following"),
                 ],
               ),
               const SizedBox(

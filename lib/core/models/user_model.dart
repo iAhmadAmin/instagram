@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class UserModel {
   String username;
   String userDp;
-  int post;
-  int followers;
-  int following;
+  List posts;
+  List followers;
+  List following;
   String name;
   String website;
   String bio;
@@ -21,7 +21,7 @@ class UserModel {
       this.website,
       this.name,
       this.password,
-      this.post,
+      this.posts,
       this.userDp,
       this.username});
 
@@ -32,7 +32,7 @@ class UserModel {
     this.followers = doc['followers'];
     this.following = doc['following'];
     this.password = doc['password'];
-    this.post = doc['post'];
+    this.posts = doc['posts'];
     this.userDp = doc['userdp'];
     this.website = doc['website'];
     this.bio = doc['bio'];
