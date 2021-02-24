@@ -120,10 +120,11 @@ class SignupPage extends StatelessWidget {
         _passwordController.text.isNotEmpty) {
       AuthService().signup(
           userModel: UserModel(
-              username: _usernameController.text,
-              name: _nameController.text,
-              email: _emailController.text,
-              password: _passwordController.text));
+        username: _usernameController.text,
+        name: _nameController.text,
+        email: _emailController.text,
+        password: _passwordController.text,
+      ));
     } else {
       Get.snackbar("Required*", "All fields are required.",
           snackPosition: SnackPosition.BOTTOM);

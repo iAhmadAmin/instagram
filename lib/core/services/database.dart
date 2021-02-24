@@ -33,9 +33,9 @@ class Database {
             "email": user.email,
             "password": user.password,
             "username": user.username,
-            "posts": user.posts,
-            "followers": user.followers,
-            "following": user.following,
+            "posts": [],
+            "followers": [],
+            "following": [],
             "website": "",
             "bio": "",
             "userdp":

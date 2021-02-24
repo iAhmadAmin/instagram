@@ -38,13 +38,11 @@ Widget infoBar(
                                 "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"),
                           ),
                   ),
-                  _counter(count: user.posts.length.toString(), label: "Posts"),
+                  _counter(count: user.posts.length ?? 0, label: "Posts"),
                   _counter(
-                      count: user.followers.length.toString(),
-                      label: "Followers"),
+                      count: user.followers.length ?? 0, label: "Followers"),
                   _counter(
-                      count: user.following.length.toString(),
-                      label: "Following"),
+                      count: user.following.length ?? 0, label: "Following"),
                 ],
               ),
               const SizedBox(
@@ -63,11 +61,11 @@ Widget infoBar(
           )));
 }
 
-Widget _counter({@required String count, @required String label}) {
+Widget _counter({@required int count, @required String label}) {
   return Column(
     children: [
       Text(
-        count,
+        count.toString(),
         style: impBodyTextStyle.copyWith(
             color: Colors.black, fontSize: 22, fontWeight: FontWeight.w600),
       ),
