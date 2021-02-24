@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/core/models/data.dart';
 import 'package:instagram/core/models/post.dart';
@@ -47,21 +48,18 @@ class _PostTileState extends State<PostTile> {
       ),
       child: Row(
         children: [
-          Hero(
-            tag: widget.post.username,
-            child: ProfileWidget(
-              onTap: () {
-                Get.to(
-                  UserProfilePage(
-                    user: users.singleWhere(
-                        (user) => user.username == widget.post.username),
-                  ),
-                );
-              },
-              size: 18,
-              story: stories.singleWhere(
-                  (story) => story.username == widget.post.username),
-            ),
+          ProfileWidget(
+            onTap: () {
+              Get.to(
+                UserProfilePage(
+                  user: users.singleWhere(
+                      (user) => user.username == widget.post.username),
+                ),
+              );
+            },
+            size: 18,
+            story: stories
+                .singleWhere((story) => story.username == widget.post.username),
           ),
           const SizedBox(
             width: 8,
@@ -99,7 +97,7 @@ class _PostTileState extends State<PostTile> {
           child: Stack(
         alignment: Alignment.center,
         children: [
-          Image.asset(widget.post.userDpUrl),
+          CachedNetworkImage(imageUrl: widget.post.postImgUrl),
           SizedBox(
             height: 160.0,
             width: 160.0,

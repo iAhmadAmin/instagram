@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:instagram/core/controllers/add_post_controller.dart';
 import 'package:instagram/sizeconfig.dart';

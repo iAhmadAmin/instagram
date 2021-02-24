@@ -79,7 +79,6 @@ class Database {
           FirebaseFirestore.instance.collection('users').doc(email).snapshots();
       return documentStream;
     } catch (e) {
-      print("********* ERROR WHILE GETTING USER STREAM ***********");
       print(e);
     }
   }
@@ -129,11 +128,8 @@ class Database {
       await _firestore
           .collection('users')
           .doc(Get.find<UserController>().user.email)
-          .collection('posts')
-          .doc(postId)
-          .set({
-        'postId': postId,
-        'imgUrl': imgUrl,
+          .update({
+        'posts': FieldValue.arrayUnion([postId])
       });
       _mainController.changeLoading();
       Get.offAll(RootPage());
@@ -143,13 +139,13 @@ class Database {
     ;
   }
 
-  Future<List<String>> userPhotoUrls(@required String username) async {
-    var result = await storageRef.child(username).listAll();
-    List<String> urls = [];
-    result.items.forEach((i) async {
-      String url = await i.getDownloadURL();
-      urls.add(url);
-    });
-    return urls;
+  allPostStream() {
+    try {
+      Stream postStream =
+          FirebaseFirestore.instance.collection('posts').snapshots();
+      return postStream;
+    } catch (e) {
+      print(e);
+    }
   }
 }

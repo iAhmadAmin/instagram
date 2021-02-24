@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagram/core/controllers/edit_profile_controller.dart';
-import 'package:instagram/core/controllers/user_controller.dart';
 import 'package:instagram/core/models/user_model.dart';
 import 'package:instagram/core/services/database.dart';
 import 'package:instagram/sizeconfig.dart';
@@ -28,11 +27,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
   bool isUpdating = false;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     _nameTextController.text = widget.user.name;
     _bioTextController.text = widget.user.bio;
     _websiteTextController.text = widget.user.website;
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return isUpdating
         ? const Scaffold(
             body: Center(
@@ -149,7 +152,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       if (_controller.file != null) {
         newImage = await Database()
             .uploadFile(file: _controller.file, id: widget.user.username);
-        print("new image: " + newImage.toString());
+        // print("new image: " + newImage.toString());
       }
 
       await Database().updateUserData(

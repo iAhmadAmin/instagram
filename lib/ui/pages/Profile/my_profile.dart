@@ -20,16 +20,11 @@ class MyProfilePage extends StatefulWidget {
 class _MyProfilePageState extends State<MyProfilePage> {
   final MainController _controller = Get.find<MainController>();
   final UserController _userController = Get.find<UserController>();
-  var urls;
+  var postIds;
 
   @override
   void initState() {
-    _getUrls();
     super.initState();
-  }
-
-  _getUrls() async {
-    urls = await Database().userPhotoUrls(_userController.user.username);
   }
 
   @override
@@ -83,9 +78,6 @@ class _MyProfilePageState extends State<MyProfilePage> {
                 height: 26,
               ),
             ),
-            urls != null
-                ? postGrid(urls: urls)
-                : const SliverToBoxAdapter(child: const SizedBox()),
           ]);
         });
   }
